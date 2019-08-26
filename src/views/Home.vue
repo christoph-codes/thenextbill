@@ -1,6 +1,5 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
     <MainLogo />
     <HelloWorld msg="The Next Bill App is Here!" />
     <MainFooter />

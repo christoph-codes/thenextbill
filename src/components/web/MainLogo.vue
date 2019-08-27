@@ -1,6 +1,8 @@
 <template>
   <div class="main-logo">
-    <img alt="The Next Bill Logo" src="@/assets/full_logo_light.png" />
+    <router-link to="/">
+      <img alt="The Next Bill Logo" src="@/assets/full_logo_light.png" />
+    </router-link>
   </div>
 </template>
 

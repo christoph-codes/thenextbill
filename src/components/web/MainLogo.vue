@@ -1,6 +1,6 @@
 <template>
   <div class="main-logo">
-    <img alt="The Next Bill Logo" src="@/assets/logo_light.png" />
+    <img alt="The Next Bill Logo" src="@/assets/full_logo_light.png" />
   </div>
 </template>
 
@@ -11,7 +11,10 @@ export default {
 </script>
 
 <style scoped>
+.main-logo {
+  text-align: center;
+}
 .main-logo img {
-  width: 100px;
+  width: 200px;
 }
 </style>

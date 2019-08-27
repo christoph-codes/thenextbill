@@ -11,3 +11,18 @@ export default {
   name: "MainFooter"
 };
 </script>
+
+<style>
+  .main-footer {
+    position: fixed;
+    bottom: 0;
+    background: var(--prime);
+    width: 100%;
+    padding: 5px 0;
+    text-align: center;
+  }
+  .main-footer small {
+    color: var(--gray);
+  }
+
+</style>

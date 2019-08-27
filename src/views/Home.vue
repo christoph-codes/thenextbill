@@ -1,13 +1,16 @@
 <template>
   <div class="home">
-    <MainLogo />
     <!-- <HelloWorld msg="The Next Bill App is Here!" /> -->
-
-    <h1 class="header">The Next Bill</h1>
-    <p>
-      The app that prioritizes your bills to properly keep you on track for financial success.
-    </p>
-    <router-link to="/create-account">Create </router-link>
+    <section class="hero" id="home">
+      <div class="narrow">
+        <MainLogo />
+        <p>
+          The app that prioritizes your bills to properly keep you on track for financial success.
+        </p>
+        <router-link class="btn prime" to="/create-account">Create an Account</router-link>
+        <router-link class="link" to="/create-account">Login</router-link>
+      </div>
+    </section>
     <MainFooter />
   </div>
 </template>
@@ -27,13 +30,14 @@ export default {
 </script>
 
 <style>
-:root {
-  --prime: #3b4557;
-  --secon: #21f787;
-  --terti: #f48b22;
-  --danger: #f22552;
+section.hero#home {
+  padding: 25vh 0;
 }
-html {
-  background: var(--prime);
+.hero#home {
+  text-align: center;
+}
+.home p {
+  font-size: 18px;
+  line-height: 170%;
 }
 </style>

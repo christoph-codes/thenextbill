@@ -34,22 +34,78 @@ html {
   text-decoration: none;
   border-radius: 5px;
   display: inline-block;
+  border: none;
+  cursor: pointer;
+  min-width: 300px;
+  margin-bottom: 10px;
+  transition: 0.3s;
 }
 .btn.prime {
   background: var(--secon);
   color: var(--prime);
 }
+.btn.secon {
+  background: var(--terti);
+  color: var(--prime);
+}
+.btn:hover {
+  background: var(--gray);
+  color: white;
+}
+a {
+  transition: 0.3s;
+}
 a.link {
     display: block;
     margin: 10px 0;
     color: var(--gray);
+    cursor: pointer;
+    font-size: 14px;
+}
+a.link:hover {
+  color: white;
 }
 p {
   font-size: 16px;
+}
+.main {
+  margin: 0 auto;
+  max-width: 1200px;
+  padding: 0 30px;
 }
 .narrow {
   margin: 0 auto;
   max-width: 600px;
   padding: 0 30px;
+}
+input[type="text"], input[type="email"], input[type="password"] {
+  width: 100%;
+  height: 30px;
+  border: none;
+  padding: 5px 0;
+  text-align: center;
+  font-size: 16px;
+  color: var(--prime);
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+section.hero {
+  position: relative;
+  height: calc(100vh - 20px);
+  text-align: center;
+}
+section.hero .content {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+h1.page-header, .content p {
+    color: white;
+}
+.content p {
+  font-size: 18px;
+  line-height: 170%;
 }
 </style>

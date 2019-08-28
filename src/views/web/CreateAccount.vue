@@ -22,15 +22,33 @@
 </template>
 
 <script>
+// import firebase for authentication
+import firebase from 'firebase'
+
 // @ is an alias to /src
 import MainLogo from "@/components/web/MainLogo.vue";
 import MainFooter from "@/components/web/MainFooter.vue";
 
 export default {
-  name: "home",
+  name: "create-account",
   components: {
     MainLogo,
     MainFooter
+  },
+  data () {
+    return {
+      email: '',
+      password: ''
+    }
+  },
+  methods: {
+    signUp () {
+      firebase.auth().createUserWithEmailAndPassword(this.email, this.password).then((user) => {
+        this.$router.replace('/login')
+      }).catch((err) => {
+        alert(err.message)
+      });
+    }
   }
 };
 </script>

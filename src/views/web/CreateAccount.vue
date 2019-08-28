@@ -74,7 +74,7 @@ export default {
                   })
                 })
                 .then(() => {
-                  this.$router.push({ name: "home"});
+                  this.$router.push({ name: "admin-dashboard"});
                 })
                 .catch(err => {
                   // console.log(err);

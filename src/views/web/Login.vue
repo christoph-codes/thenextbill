@@ -6,13 +6,17 @@
           <MainLogo />
           <h1 class="page-header">Login</h1>
           <form @submit.prevent="login">
-            <input type="email" name="user_email" v-model="email">
-            <input type="password" name="user_password" v-model="password">
-            <input type="submit" value="Login" class="btn prime">
+            <input type="email" name="user_email" v-model="email" />
+            <input type="password" name="user_password" v-model="password" />
+            <input type="submit" value="Login" class="btn prime" />
           </form>
           <p v-if="feedback">{{ feedback }}</p>
-          <router-link class="link" to="/create-account">Create Account</router-link>
-          <router-link class="link" to="/forgot-password">Forgot Password?</router-link>
+          <router-link class="link" to="/create-account">
+            Create Account
+          </router-link>
+          <router-link class="link" to="/forgot-password">
+            Forgot Password?
+          </router-link>
         </div>
       </div>
     </section>
@@ -48,12 +52,12 @@ export default {
           // console.log(cred.user);
           this.$router.push({ name: "admin-dashboard" });
         })
-        .catch(err => {
-          this.feedback = err.message;
-        }) 
-        this.feedback = null
+          .catch(err => {
+            this.feedback = err.message;
+          });
+        this.feedback = null;
       } else {
-        this.feedback = "Please fill in both fields."
+        this.feedback = "Please fill in both fields.";
       }
     }
   }

@@ -3,7 +3,7 @@ import App from "./App.vue";
 import router from "./router";
 import firebase from "firebase";
 
-/* eslint-disable no-new */
+/* eslint-disable */
 new Vue({
   router,
   render: h => h(App)

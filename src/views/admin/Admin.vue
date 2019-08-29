@@ -1,6 +1,6 @@
 <template>
   <div id="adminHome">
-    <AdminNav/>
+    <AdminNav />
     
   </div>
 </template>
@@ -14,10 +14,7 @@ export default {
     AdminNav
   },
   data() {
-    return {
-    };
+    return {};
   }
 };
 </script>
-
-

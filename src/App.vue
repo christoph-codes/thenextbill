@@ -1,4 +1,5 @@
 <template>
+  <!--- eslint-disable -->
   <div id="app">
     <router-view />
   </div>
@@ -56,11 +57,11 @@ a {
   transition: 0.3s;
 }
 a.link {
-    display: block;
-    margin: 10px 0;
-    color: var(--gray);
-    cursor: pointer;
-    font-size: 14px;
+  display: block;
+  margin: 10px 0;
+  color: var(--gray);
+  cursor: pointer;
+  font-size: 14px;
 }
 a.link:hover {
   color: white;
@@ -102,7 +103,7 @@ section.hero .content {
   transform: translate(-50%, -50%);
 }
 h1.page-header, .content p {
-    color: white;
+  color: white;
 }
 .content p {
   font-size: 18px;

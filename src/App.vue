@@ -6,6 +6,7 @@
 
 <style>
 @import url("https://fonts.googleapis.com/css?family=Montserrat:300,300i,700,700i&display=swap");
+@import "../node_modules/uikit/dist/css/uikit-core.css";
 #app {
   font-family: "Montserrat", sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -19,7 +20,7 @@
   --gray: #898f9a;
 }
 html {
-  background: var(--prime);
+  background: var(--prime) !important;
 }
 .home h1,
 .home p {

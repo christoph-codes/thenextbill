@@ -1,7 +1,6 @@
 <template>
     <div class="admin-dashboard">
-        <AdminNav />
-        <h1 class="page-header">This is the dashboard</h1>
+        <p>Dashboard Data</p>
     </div>
 </template>
 

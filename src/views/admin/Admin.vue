@@ -34,7 +34,7 @@ export default {
 
 <style>
 div#adminHome {
-  background: var(--lgray);
+  background: var(--wgray);
 }
 .admin-side-nav {
   height: 100vh;

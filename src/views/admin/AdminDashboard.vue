@@ -9,11 +9,11 @@
           <div class="bill-content">
             <h1 class="bill-name">{{ bill.name }}</h1>
             <p class="bill-due-date">
-              <span class="bill-label">Due Date:</span><br />
+              <span class="bill-label">Due Date</span><br />
               {{ bill.due_day }}
             </p>
             <p class="bill-amount">
-              <span class="bill-label">Due Date:</span><br />
+              <span class="bill-label">Amount</span><br />
               ${{ bill.amount }}
             </p>
             <hr />
@@ -21,13 +21,13 @@
               <div class="uk-grid">
                 <div class="uk-width-1-2">
                   <p class="bill-priority">
-                    <span class="bill-details-label">Priority: </span><br />
+                    <span class="bill-details-label">Priority </span><br />
                     {{ bill.priority }}
                   </p>
                 </div>
                 <div class="uk-width-1-2">
                   <p class="bill-category">
-                    <span class="bill-details-label">Category: </span><br />
+                    <span class="bill-details-label">Category </span><br />
                     {{ bill.category }}
                   </p>
                 </div>
@@ -101,10 +101,10 @@ export default {
 .bill-message {
   padding: 15px;
   text-align: center;
-  background: var(--gray);
+  background: var(--lgray);
 }
 .bill-message p {
-  color: white;
+  color: var(--gray);
   margin: 0px;
 }
 .uk-width-1-3:first-child .bill-card {
@@ -115,5 +115,12 @@ export default {
 }
 .uk-width-1-3:first-child .bill-message p {
   color: var(--secon);
+}
+span.bill-label,
+span.bill-details-label {
+  color: var(--lgray);
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 14px;
 }
 </style>

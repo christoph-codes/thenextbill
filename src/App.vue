@@ -31,7 +31,8 @@ export default {
   --wterti: #fde8d3;
   --danger: #f22552;
   --gray: #898f9a;
-  --lgray: #eff0f1;
+  --lgray: #d8dadd;
+  --wgray: #eff0f1;
 }
 html {
   background: var(--prime) !important;

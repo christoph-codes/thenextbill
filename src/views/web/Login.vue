@@ -27,7 +27,7 @@ import MainFooter from "@/components/web/MainFooter.vue";
 import firebase from "firebase";
 
 export default {
-  name: "home",
+  name: "login",
   data() {
     return {
       email: null,

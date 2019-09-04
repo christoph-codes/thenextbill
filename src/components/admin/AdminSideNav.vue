@@ -1,6 +1,10 @@
 <template>
   <div class="admin-side-nav">
-    <p>Admin Side Nav</p>
+    <img
+      class="dashboard-logo"
+      alt="The Next Bill Dashboard"
+      src="@/assets/tnb-full_logo.png"
+    />
     <hr />
     <ul>
       <li><router-link to="/admin/dashboard">Dashboard</router-link></li>
@@ -20,6 +24,9 @@ export default {
 <style>
 .admin-side-nav {
   background: var(--lgray);
+  text-align: center;
+  padding: 30px;
+  height: 100%;
 }
 .admin-side-nav ul {
   padding: 0;
@@ -32,5 +39,10 @@ export default {
 .admin-side-nav li a {
   color: var(--gray);
   font-size: 16px;
+}
+img.dashboard-logo {
+  width: 70%;
+  margin: 30px auto;
+  display: inline-block;
 }
 </style>

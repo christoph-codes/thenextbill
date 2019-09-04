@@ -1,6 +1,53 @@
 <template>
   <div class="admin-add-bill">
-    <h1 class="page-header">Add Bill</h1>
+    <h1 class="dashboard-header">Add Bill</h1>
+    <div class="narrow">
+      <form class="add-bill-form" @submit.prevent="addBill">
+        <input type="text" placeholder="Bill Name" v-model="name" />
+        <input
+          type="number"
+          placeholder="Bill Due Day (4)"
+          min="1"
+          max="31"
+          v-model="due_day"
+        />
+        <input
+          type="number"
+          min="0.01"
+          step="0.01"
+          placeholder="Bill Amount"
+          v-model="amount"
+        />
+        <select required v-model="category">
+          <option value="" disabled selected>Choose Bill Category</option>
+          <option value="housing">Housing</option>
+          <option value="food">Food</option>
+          <option value="transportation">Transportation</option>
+          <option value="utilities">Utilities</option>
+          <option value="entertainment">Entertainment</option>
+          <option value="misc">MISC</option>
+        </select>
+        <input
+          type="number"
+          min="0"
+          max="3"
+          step="1"
+          placeholder="Priority Level"
+          v-model="priority"
+        />
+        <select required v-model="recurrence">
+          <option value="" disabled selected>Bill Recurrence</option>
+          <option value="weekly">Weekly</option>
+          <option value="bi-weekly">Bi-weekly</option>
+          <option value="monthly">Monthly</option>
+          <option value="quarterly">Quarterly</option>
+          <option value="annually">Annually</option>
+          <option value="one-time">One-Time</option>
+        </select>
+        <input type="submit" value="Add Bill" class="btn prime" />
+        <p class="text-danger" v-if="feedback">{{ feedback }}</p>
+      </form>
+    </div>
   </div>
 </template>
 
@@ -23,7 +70,8 @@ export default {
       recurrence: null,
       user_id: null,
       slug: null,
-      feedback: null
+      feedback: null,
+      paid_status: false
     };
   },
   created() {
@@ -79,7 +127,8 @@ export default {
             priority: this.priority,
             recurrence: this.recurrence,
             user_id: this.admin.user_id,
-            creationdate: this.fbCreationDate
+            creationdate: this.fbCreationDate,
+            paid_status: false
           })
           .then(() => {
             this.$router.push({ name: "admin-dashboard" });
@@ -93,7 +142,7 @@ export default {
             this.bills.$forceUpdate();
           });
       } else {
-        this.feedback = "You must enter a Bill Name!";
+        this.feedback = "You must complete all fields!";
       }
     },
     convertDate(timestamp) {
@@ -115,3 +164,13 @@ export default {
   }
 };
 </script>
+
+<style>
+h1.dashboard-header {
+  color: var(--prime);
+  font-weight: bold;
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 28px;
+}
+</style>

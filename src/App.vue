@@ -52,7 +52,8 @@ html {
   display: inline-block;
   border: none;
   cursor: pointer;
-  min-width: 300px;
+  max-width: 300px;
+  width: 100%;
   margin-bottom: 10px;
   transition: 0.3s;
 }
@@ -94,8 +95,15 @@ p {
   max-width: 600px;
   padding: 0 30px;
 }
+form {
+  text-align: center;
+}
 input[type="text"],
 input[type="email"],
+input[type="number"],
+select,
+input[type="radio"],
+input[type="date"],
 input[type="password"] {
   width: 100%;
   height: 30px;
@@ -106,6 +114,21 @@ input[type="password"] {
   color: var(--prime);
   border-radius: 5px;
   margin-bottom: 20px;
+}
+input[type="text"],
+input[type="email"],
+input[type="number"],
+input[type="radio"],
+input[type="date"],
+input[type="password"] {
+  height: 30px;
+}
+input::placeholder {
+  color: var(--lgray);
+}
+select {
+  height: 40px;
+  background: white;
 }
 section.hero {
   position: relative;
@@ -126,5 +149,8 @@ h1.page-header,
 .content p {
   font-size: 18px;
   line-height: 170%;
+}
+.text-danger {
+  color: var(--danger);
 }
 </style>

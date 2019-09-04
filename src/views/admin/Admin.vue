@@ -36,14 +36,11 @@ export default {
 div#adminHome {
   background: var(--wgray);
 }
-.admin-side-nav {
-  height: 100vh;
-  padding: 20px;
+.dashboard-view {
+  padding: 0 50px 0;
+  height: 100%;
 }
 .dashboard {
-  padding: 30px 0;
-}
-.dashboard-view {
-  padding: 0 20px;
+  padding-bottom: 50px;
 }
 </style>

@@ -41,6 +41,30 @@
             </div>
             <div class="bill-paid-btn">
               <a class="btn" @click="toggle(bill)">Mark as Paid</a>
+              <a class="btn modal" uk-toggle="target: #add-bill-modal"
+                >Open Modal</a
+              >
+            </div>
+            <div
+              id="add-bill-modal"
+              class="add-bill-modal uk-flex-top"
+              uk-modal
+            >
+              <div
+                class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical"
+              >
+                <h2 class="uk-modal-title">
+                  Are you sure you want to mark {{ bill.name }} as paid?
+                </h2>
+                <a
+                  class="uk-modal-close btn prime"
+                  @click="toggle(bill)"
+                  href=""
+                  >Confirm</a
+                >
+                <a class="uk-modal-close btn secon" href="">Cancel</a>
+                <a href="" uk-close></a>
+              </div>
             </div>
           </div>
         </div>
@@ -91,32 +115,41 @@ export default {
         let bills = db
           .collection("bills")
           .where("user_id", "==", this.admin.user_id)
-          .orderBy("amount");
+          .orderBy("due_day")
+          .orderBy("amount")
+          .orderBy("priority");
         bills.onSnapshot(snapshot => {
           snapshot.docChanges().forEach(change => {
             let bill = change.doc.data();
             bill.id = change.doc.id;
             if (change.type === "added") {
-                // console.log("New bill: ", bill.name);
-                this.bills.push(bill);
+              // console.log("New bill: ", bill.name);
+              this.bills.push(bill);
             }
             if (change.type === "modified") {
-                console.log("Bill updated: " + bill.name);
-                this.bills.push(bill);
+              // console.log("Bill updated: " + bill.name);
+              this.bills.push(bill);
             }
-            
           });
         });
       });
     },
     toggle(bill) {
-        db.collection("bills").doc(bill.id).update({
-            paid_status: !bill.paid_status
-        }).then(() => {
-            bill.paid_status = !this.paid_status;
-            console.log("Paid Status Updated");
-        }).catch(err =>{
-            console.log(err);
+      db.collection("bills")
+        .doc(bill.id)
+        .update({
+          // toggle paid status on server
+          paid_status: !bill.paid_status
+        })
+        .then(() => {
+          // toggle paid status on local
+          bill.paid_status = !this.paid_status;
+          // console.log("Paid Status Updated");
+        })
+        .catch(err => {
+          // catch errors if something goes wrong
+          // console.log(err);
+          this.feedback = err;
         });
     }
   },

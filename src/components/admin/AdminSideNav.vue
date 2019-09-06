@@ -25,7 +25,7 @@ export default {
 .admin-side-nav {
   background: var(--lgray);
   text-align: center;
-  padding: 30px;
+  padding: 0 30px;
   height: 100%;
 }
 .admin-side-nav ul {
@@ -42,7 +42,6 @@ export default {
 }
 img.dashboard-logo {
   width: 70%;
-  margin: 30px auto;
-  display: inline-block;
+  margin: 60px auto 30px;
 }
 </style>

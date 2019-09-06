@@ -37,6 +37,10 @@ export default {
 html {
   background: var(--prime) !important;
 }
+::selection {
+  background: var(--lgray);
+  color: var(--gray);
+}
 .home h1,
 .home p {
   color: white;
@@ -69,7 +73,8 @@ html {
   background: var(--gray);
   color: white;
 }
-a {
+a,
+a * {
   transition: 0.3s;
 }
 a.link {
@@ -78,6 +83,7 @@ a.link {
   color: var(--gray);
   cursor: pointer;
   font-size: 14px;
+  transition: 0.3s;
 }
 a.link:hover {
   color: white;

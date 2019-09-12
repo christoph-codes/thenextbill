@@ -69,14 +69,14 @@
           </div>
         </div>
       </div>
-      <div class="uk-width-1-1@m bill">
+      <div class="uk-width-1-3@m uk-width-1-1@s bill">
         <div class="add-bill-card">
           <div class="add-bill-content">
-            <router-link to="/admin/add-bill">
-              <h3 class="add-bill-title">
-                Add Bill [+]
-              </h3>
-            </router-link>
+            <h3 class="add-bill-title">
+              <router-link to="/admin/add-bill">
+                [+]<br />Add Bill
+              </router-link>
+            </h3>
           </div>
         </div>
       </div>
@@ -236,6 +236,9 @@ p.bill-amount {
   background: var(--secon);
   color: white;
 }
+.bill:nth-child(1n + 4) {
+  margin-top: 30px;
+}
 span.bill-label,
 span.bill-details-label {
   color: var(--lgray);
@@ -255,7 +258,7 @@ span.bill-details-label {
   color: white;
 }
 .add-bill-card {
-  padding: 30px;
+  padding: 50px 30px;
   background: white;
   box-shadow: 0 0 30px -20px var(--gray);
   text-align: center;
@@ -263,12 +266,19 @@ span.bill-details-label {
 .add-bill-content .add-bill-title {
   text-transform: uppercase;
   font-size: 21px;
-  color: var(--lgray);
   font-weight: bold;
   margin: 0;
+  padding: 50px 0;
 }
-.add-bill-content a:hover * {
+.add-bill-title a {
+  position: relative;
+  color: var(--lgray);
+  cursor: pointer;
   text-decoration: none;
-  color: var(--prime);
+}
+.add-bill-title a:hover {
+  position: relative;
+  color: var(--gray);
+  cursor: pointer;
 }
 </style>

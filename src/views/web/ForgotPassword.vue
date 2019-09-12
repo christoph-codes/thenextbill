@@ -5,12 +5,17 @@
         <div class="narrow">
           <MainLogo />
           <h1 class="page-header">Forgot Password</h1>
-          <p>Enter your email associated with your account and we will send you a link to reset your password.</p>
+          <p>
+            Enter your email associated with your account and we will send you a
+            link to reset your password.
+          </p>
           <form action="#">
-            <input type="email" placeholder="Email" name="user_email">
-            <input type="submit" value="Recover Password" class="btn prime">
+            <input type="email" placeholder="Email" name="user_email" />
+            <input type="submit" value="Recover Password" class="btn prime" />
           </form>
-          <router-link class="link" to="/create-account">Create Account</router-link>
+          <router-link class="link" to="/create-account"
+            >Create Account</router-link
+          >
           <router-link class="link" to="/login">Login</router-link>
         </div>
       </div>

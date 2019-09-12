@@ -45,8 +45,9 @@
           <option value="one-time">One-Time</option>
         </select>
         <input type="submit" value="Add Bill" class="btn prime" />
-        <p class="text-danger" v-if="feedback">{{ feedback }}</p>
       </form>
+      <router-link class="btn secon">Cancel</router-link>
+      <p class="text-danger" v-if="feedback">{{ feedback }}</p>
     </div>
   </div>
 </template>
@@ -75,29 +76,7 @@ export default {
     };
   },
   created() {
-    // get current user
-    let admin = firebase.auth().currentUser;
-
-    // find the logged in user record and grab its data
-    let user = db.collection("users").where("user_id", "==", admin.uid);
-
-    user.get().then(snapshot => {
-      snapshot.forEach(doc => {
-        (this.admin = doc.data()), (this.admin.id = doc.id);
-      });
-
-      // get current user's bills
-      let bills = db
-        .collection("bills")
-        .where("user_id", "==", this.admin.user_id);
-      bills.get().then(snapshot => {
-        snapshot.forEach(doc => {
-          let bill = doc.data();
-          bill.id = doc.id;
-          this.bills.push(bill);
-        });
-      });
-    });
+    this.getUserAndBills();
   },
   methods: {
     addBill() {
@@ -128,7 +107,8 @@ export default {
             recurrence: this.recurrence,
             user_id: this.admin.user_id,
             creationdate: this.fbCreationDate,
-            paid_status: false
+            paid_status: false,
+            slug: this.slug
           })
           .then(() => {
             this.$router.push({ name: "admin-dashboard" });
@@ -139,11 +119,46 @@ export default {
             this.amount = "";
             this.creationdate = "";
             this.recurrence = "";
-            this.bills.$forceUpdate();
+            // this.bills.$forceUpdate();
           });
       } else {
         this.feedback = "You must complete all fields!";
       }
+    },
+    getUserAndBills() {
+      // get current user
+      let admin = firebase.auth().currentUser;
+
+      // find the logged in user record and grab its data
+      let user = db.collection("users").where("user_id", "==", admin.uid);
+
+      user.get().then(snapshot => {
+        snapshot.forEach(doc => {
+          (this.admin = doc.data()), (this.admin.id = doc.id);
+        });
+
+        // get current user's bills
+        let bills = db
+          .collection("bills")
+          .where("user_id", "==", this.admin.user_id)
+          .orderBy("due_day")
+          .orderBy("amount")
+          .orderBy("priority");
+        bills.onSnapshot(snapshot => {
+          snapshot.docChanges().forEach(change => {
+            let bill = change.doc.data();
+            bill.id = change.doc.id;
+            if (change.type === "added") {
+              // console.log("New bill: ", bill.name);
+              this.bills.push(bill);
+            }
+            if (change.type === "modified") {
+              // console.log("Bill updated: " + bill.name);
+              this.bills.push(bill);
+            }
+          });
+        });
+      });
     },
     convertDate(timestamp) {
       let date = timestamp.toDate();

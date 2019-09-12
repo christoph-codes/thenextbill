@@ -6,8 +6,8 @@
         <div class="narrow">
           <MainLogo />
           <p>
-            The app that prioritizes your bills to properly keep you on track for 
-            financial success.
+            The app that prioritizes your bills to properly keep you on track
+            for financial success.
           </p>
           <router-link class="btn prime" to="/create-account">
             Create an Account
@@ -35,4 +35,3 @@ export default {
   }
 };
 </script>
-

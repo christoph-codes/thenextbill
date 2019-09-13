@@ -60,6 +60,7 @@ html {
   width: 100%;
   margin-bottom: 10px;
   transition: 0.3s;
+  text-align: center;
 }
 .btn.prime {
   background: var(--secon);
@@ -113,7 +114,7 @@ input[type="date"],
 input[type="password"] {
   width: 100%;
   height: 30px;
-  border: none;
+  border: solid var(--wgray) 1px;
   padding: 5px 0;
   text-align: center;
   font-size: 16px;

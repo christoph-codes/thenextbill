@@ -35,6 +35,7 @@ export default {
 <style>
 div#adminHome {
   background: var(--wgray);
+  min-height: 100vh;
 }
 .dashboard-view {
   padding: 0 50px 0;

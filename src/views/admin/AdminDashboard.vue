@@ -63,7 +63,7 @@
                   >Confirm</a
                 >
                 <a class="uk-modal-close btn secon" href="">Cancel</a>
-                <a href="" uk-close></a>
+                <a class="uk-modal-close-default" href="" uk-close></a>
               </div>
             </div>
           </div>
@@ -280,5 +280,11 @@ span.bill-details-label {
   position: relative;
   color: var(--gray);
   cursor: pointer;
+}
+.uk-modal .uk-modal-body {
+  text-align: center;
+}
+.uk-modal .uk-modal-title {
+  color: var(--prime);
 }
 </style>

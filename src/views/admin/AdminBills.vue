@@ -30,11 +30,12 @@
               <a href="" @click="toggle(bill)">Paid</a>
             </td>
             <td>
-              <a
-                class="modal"
-                uk-toggle="target: #edit-bill-modal"
-                data-id="bill"
-                >Edit Bill Modal</a
+              <router-link
+                :to="{
+                  name: 'admin-edit-bill',
+                  params: { bill_slug: bill.slug }
+                }"
+                >Edit Bill</router-link
               >
             </td>
           </tr>
@@ -91,31 +92,33 @@ export default {
               this.bills.push(bill);
             }
             if (change.type === "modified") {
-              // console.log("Bill updated: " + bill.name);
-              this.bills.push(bill);
+              console.log("Bill updated: " + bill.name);
             }
           });
         });
       });
-    },
-    toggle(bill) {
-      db.collection("bills")
-        .doc(bill.id)
-        .update({
-          // toggle paid status on server
-          paid_status: !bill.paid_status
-        })
-        .then(() => {
-          // toggle paid status on local
-          bill.paid_status = !this.paid_status;
-          // console.log("Paid Status Updated");
-        })
-        .catch(err => {
-          // catch errors if something goes wrong
-          // console.log(err);
-          this.feedback = err;
-        });
     }
+    // toggle(bill) {
+    //   db.collection("bills")
+    //     .doc(bill.id)
+    //     .update({
+    //       // toggle paid status on server
+    //       // paid_status: !bill.paid_status
+    //     })
+    //     .then(() => {
+    //       console.log("This is the new paid status" + bill.paid_status)
+    //       // toggle paid status on local
+    //       // bill.paid_status = !this.bill.paid_status;
+    //       // push this bill to local bills
+    //       // this.bills.push(bill);
+    //       // console.log("Paid Status Updated");
+    //     })
+    //     .catch(err => {
+    //       // catch errors if something goes wrong
+    //       // console.log(err);
+    //       this.feedback = err;
+    //     });
+    // }
   },
   created() {
     this.getUserAndBills();

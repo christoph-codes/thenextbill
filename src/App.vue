@@ -7,6 +7,7 @@
 <script>
 import "../node_modules/uikit/dist/js/uikit-core.js";
 import "../node_modules/uikit/dist/js/uikit.js";
+import "../node_modules/uikit/dist/js/uikit-icons.min.js";
 
 export default {
   name: "app"
@@ -16,6 +17,7 @@ export default {
 <style>
 @import url("https://fonts.googleapis.com/css?family=Montserrat:300,300i,700,700i&display=swap");
 @import "../node_modules/uikit/dist/css/uikit-core.css";
+
 #app {
   font-family: "Montserrat", sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -58,7 +60,7 @@ html {
   cursor: pointer;
   max-width: 300px;
   width: 100%;
-  margin-bottom: 10px;
+  margin: 0 5px 10px;
   transition: 0.3s;
   text-align: center;
 }
@@ -69,6 +71,14 @@ html {
 .btn.secon {
   background: var(--terti);
   color: var(--prime);
+}
+.btn.terti {
+  background: var(--lgray);
+  color: var(--gray);
+}
+.btn.danger {
+  background: var(--danger);
+  color: white;
 }
 .btn:hover {
   background: var(--gray);
@@ -159,5 +169,10 @@ h1.page-header,
 }
 .text-danger {
   color: var(--danger);
+}
+.uk-modal-dialog p {
+  color: var(--gray);
+  font-size: 18px;
+  font-weight: lighter;
 }
 </style>

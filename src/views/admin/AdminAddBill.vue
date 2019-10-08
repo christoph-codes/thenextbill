@@ -5,11 +5,12 @@
       <form class="add-bill-form" @submit.prevent="addBill">
         <input type="text" placeholder="Bill Name" v-model="name" />
         <input
-          type="number"
+          type="date"
           placeholder="Bill Due Day (4)"
           min="1"
           max="31"
           v-model="due_day"
+          name="dueday"
         />
         <input
           type="number"
@@ -101,7 +102,7 @@ export default {
           .add({
             amount: this.amount,
             category: this.category,
-            due_day: this.due_day,
+            due_day: this.fbDate,
             name: this.name,
             priority: this.priority,
             recurrence: this.recurrence,
@@ -175,6 +176,12 @@ export default {
       const date = new Date();
       // console.log(date);
       return date;
+    },
+    // Convert Date String to Firebase Timestamp
+    fbDate() {
+        const date = new Date(this.due_day)
+        console.log(date);
+        return date;
     }
   }
 };

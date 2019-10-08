@@ -14,7 +14,7 @@
             <h1 class="bill-name">{{ bill.name }}</h1>
             <p class="bill-due-date">
               <span class="bill-label">Due Date</span><br />
-              {{ bill.due_day }}
+              {{ convertTimestamp(bill.due_day) }}
             </p>
             <p class="bill-amount">
               <span class="bill-label">Amount</span><br />
@@ -151,6 +151,15 @@ export default {
           // console.log(err);
           this.feedback = err;
         });
+    },
+    convertTimestamp(timestamp) {
+      let date = timestamp.toDate();
+      let mm = date.getMonth();
+      let dd = date.getDate();
+      let yyyy = date.getFullYear();
+
+      date = mm + "/" + dd + "/" + yyyy;
+      return date;
     }
   },
   created() {

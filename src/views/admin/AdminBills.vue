@@ -19,7 +19,7 @@
           <tr v-for="bill in bills" :key="bill.id">
             <td class="bold-table-data">{{ bill.name }}</td>
             <td>${{ bill.amount }}</td>
-            <td>{{ bill.due_day }}</td>
+            <td>{{ convertTimestamp(bill.due_day) }}</td>
             <td>{{ bill.category }}</td>
             <td>{{ bill.priority }}</td>
             <td>{{ bill.recurrence }}</td>
@@ -97,7 +97,17 @@ export default {
           });
         });
       });
+    },
+    convertTimestamp(timestamp) {
+      let date = timestamp.toDate();
+      let mm = date.getMonth();
+      let dd = date.getDate();
+      let yyyy = date.getFullYear();
+
+      date = mm + "/" + dd + "/" + yyyy;
+      return date;
     }
+
     // toggle(bill) {
     //   db.collection("bills")
     //     .doc(bill.id)

@@ -1,17 +1,19 @@
 <template>
   <div class="admin-side-nav">
-    <img
-      class="dashboard-logo"
-      alt="The Next Bill Dashboard"
-      src="@/assets/tnb-full_logo.png"
-    />
-    <hr />
-    <ul>
-      <li><router-link to="/admin/dashboard">Dashboard</router-link></li>
-      <li><router-link to="/admin/add-bill">Add Bill</router-link></li>
-      <li><router-link to="/admin/edit-bill">Edit Bill</router-link></li>
-      <li><router-link to="/admin/settings">Settings</router-link></li>
-    </ul>
+    <div class="admin-side-nav-content uk-sticky" uk-sticky>
+      <img
+        class="dashboard-logo"
+        alt="The Next Bill Dashboard"
+        src="@/assets/tnb-full_logo.png"
+      />
+      <hr />
+      <ul>
+        <li><router-link to="/admin/dashboard">Dashboard</router-link></li>
+        <li><router-link to="/admin/add-bill">Add Bill</router-link></li>
+        <li><router-link to="/admin/bills">Edit Bills</router-link></li>
+        <li><router-link to="/admin/settings">Settings</router-link></li>
+      </ul>
+    </div>
   </div>
 </template>
 
@@ -26,6 +28,7 @@ export default {
   background: var(--lgray);
   text-align: center;
   padding: 0 30px;
+  min-height: 100vh;
   height: 100%;
 }
 .admin-side-nav ul {

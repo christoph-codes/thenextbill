@@ -10,6 +10,8 @@ import Admin from "./views/admin/Admin.vue";
 // Admin Templatees
 import AdminDashboard from "./views/admin/AdminDashboard.vue";
 import AdminAddBill from "./views/admin/AdminAddBill.vue";
+import AdminEditBill from "./views/admin/AdminEditBill.vue";
+import AdminBills from "./views/admin/AdminBills.vue";
 import PageNotFound from "./views/web/NotFound.vue";
 //Libraries
 import firebase from "firebase";
@@ -57,6 +59,16 @@ const router = new Router({
           path: "add-bill",
           name: "admin-add-bill",
           component: AdminAddBill
+        },
+        {
+          path: "edit-bill/:bill_slug",
+          name: "admin-edit-bill",
+          component: AdminEditBill
+        },
+        {
+          path: "bills",
+          name: "admin-bills",
+          component: AdminBills
         }
       ]
     },

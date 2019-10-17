@@ -8,15 +8,18 @@
       >
         <div class="bill-card">
           <div class="bill-message">
-            <p>{{ bill_message }}</p>
+            <p v-if="bill_message">{{ bill_message }}</p>
           </div>
           <div class="bill-content">
-            <h1 class="bill-name">{{ bill.name }}</h1>
-            <p class="bill-due-date">
+            <h1 class="bill-name" v-if="bill.name">{{ bill.name }}</h1>
+            <p class="bill-due-date" v-if="typeof bill.due_day === 'object'">
               <span class="bill-label">Due Date</span><br />
               {{ convertTimestamp(bill.due_day) }}
             </p>
-            <p class="bill-amount">
+            <p v-else>
+              No due date set
+            </p>
+            <p class="bill-amount" v-if="bill.amount">
               <span class="bill-label">Amount</span><br />
               ${{ bill.amount }}
             </p>
@@ -32,14 +35,20 @@
                 </div>
                 <div class="uk-width-1-2">
                   <ul class="bill-details-value">
-                    <li>{{ bill.category }}</li>
-                    <li>{{ bill.recurrence }}</li>
-                    <li>{{ bill.priority }}</li>
+                    <li>
+                      <div v-if="bill.category">{{ bill.category }}</div>
+                    </li>
+                    <li>
+                      <div v-if="bill.recurrence">{{ bill.recurrence }}</div>
+                    </li>
+                    <li>
+                      <div v-if="bill.priority">{{ bill.priority }}</div>
+                    </li>
                   </ul>
                 </div>
               </div>
             </div>
-            <div class="bill-paid-btn">
+            <div class="bill-paid-btn" v-if="bill.paid != true">
               <a class="btn" @click="toggle(bill)">Mark as Paid</a>
               <a class="btn modal" uk-toggle="target: #add-bill-modal"
                 >Open Modal</a
@@ -154,7 +163,7 @@ export default {
     },
     convertTimestamp(timestamp) {
       let date = timestamp.toDate();
-      let mm = date.getMonth();
+      let mm = date.getMonth() + 1;
       let dd = date.getDate();
       let yyyy = date.getFullYear();
 

@@ -2,7 +2,9 @@
   <div class="admin-bills">
     <h1 class="dashboard-header">Bills</h1>
     <div class="bills-table">
-      <table class="uk-table uk-table-responsive uk-table-divider">
+      <table
+        class="uk-table uk-table-hover uk-table-responsive uk-table-divider"
+      >
         <thead>
           <tr>
             <th>Bill Name</th>
@@ -19,7 +21,11 @@
           <tr v-for="bill in bills" :key="bill.id">
             <td class="bold-table-data">{{ bill.name }}</td>
             <td>${{ bill.amount }}</td>
-            <td>{{ convertTimestamp(bill.due_day) }}</td>
+            <td>
+              <div v-if="typeof bill.due_day === 'object'">
+                {{ convertTimestamp(bill.due_day) }}
+              </div>
+            </td>
             <td>{{ bill.category }}</td>
             <td>{{ bill.priority }}</td>
             <td>{{ bill.recurrence }}</td>
@@ -92,20 +98,30 @@ export default {
               this.bills.push(bill);
             }
             if (change.type === "modified") {
-              console.log("Bill updated: " + bill.name);
+              //console.log("Bill updated: " + bill.name);
             }
           });
         });
       });
     },
     convertTimestamp(timestamp) {
-      let date = timestamp.toDate();
-      let mm = date.getMonth();
-      let dd = date.getDate();
+      if (!timestamp) return;
+      let date = new Date(timestamp.seconds * 1000);
+
       let yyyy = date.getFullYear();
+      let mm = (parseInt(date.getMonth()) + 1).toString().slice(-2);
+      let dd = date.getDate();
 
       date = mm + "/" + dd + "/" + yyyy;
       return date;
+
+      // let date = timestamp.toDate();
+      // let mm = date.getMonth();
+      // let dd = date.getDate();
+      // let yyyy = date.getFullYear();
+
+      // date = mm + "/" + dd + "/" + yyyy;
+      // return date;
     }
 
     // toggle(bill) {
@@ -171,5 +187,9 @@ td.bold-table-data {
 }
 tbody tr:first-child {
   background: var(--wsecon);
+}
+.uk-table-hover > tr:hover,
+.uk-table-hover tbody tr:hover {
+  background: #e5e6f0;
 }
 </style>

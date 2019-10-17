@@ -4,13 +4,8 @@
     <div class="narrow">
       <form class="edit-bill-form" @submit.prevent="editBill">
         <input type="text" placeholder="Bill Name" v-model="bill.name" />
-        <input
-          type="number"
-          placeholder="Bill Due Day (4)"
-          min="1"
-          max="31"
-          v-model="bill.due_day"
-        />
+        <input type="date" v-if="convertedDate" v-model="newDate" />
+        <!-- <input type="date" v-model="fbDate" /> -->
         <input
           type="number"
           min="0.01"
@@ -86,7 +81,8 @@ export default {
   data() {
     return {
       bill: {},
-      feedback: null
+      feedback: null,
+      newDate: null
     };
   },
   created() {
@@ -112,14 +108,7 @@ export default {
       }
     },
     editBill() {
-      if (
-        this.bill.name &&
-        this.bill.amount &&
-        this.bill.category &&
-        this.bill.priority &&
-        this.bill.due_day &&
-        this.bill.recurrence
-      ) {
+      if (this.bill) {
         this.feedback = null;
         // create a slug
         this.bill.slug = slugify(this.bill.name, {
@@ -134,7 +123,8 @@ export default {
           .update({
             amount: this.bill.amount,
             category: this.bill.category,
-            due_day: this.bill.due_day,
+            // due_day: this.fbDate,
+            due_day: new Date(this.newDate).seconds * 1000,
             name: this.bill.name,
             priority: this.bill.priority,
             recurrence: this.bill.recurrence,
@@ -161,6 +151,31 @@ export default {
         .then(() => {
           this.$router.push({ name: "admin-bills" });
         });
+    }
+  },
+  computed: {
+    // Convert Date String to Firebase Timestamp
+    fbDate() {
+      const date = new Date(this.convertedDate).getTime();
+      // console.log(date);
+      return date;
+    },
+    //convert firebase date to date input format
+    convertedDate() {
+      // convert date to html format ---------------------------vvv
+      if (!this.bill.due_day) return;
+      let date = new Date(this.bill.due_day.seconds * 1000);
+
+      let yyyy = date.getFullYear();
+      let mm = ("0" + parseInt(date.getMonth() + 1)).toString().slice(-2);
+      // let mm = date.getUTCMonth();
+      let dd = ("0" + date.getDate()).slice(-2);
+      // let dd = date.getUTCDate();
+
+      date = yyyy + "-" + mm + "-" + dd;
+      // eslint-disable-next-line
+      this.newDate = date;
+      return date;
     }
   }
 };

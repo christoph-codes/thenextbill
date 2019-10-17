@@ -179,9 +179,9 @@ export default {
     },
     // Convert Date String to Firebase Timestamp
     fbDate() {
-        const date = new Date(this.due_day)
-        console.log(date);
-        return date;
+      const date = new Date(this.due_day);
+      // console.log(date);
+      return date;
     }
   }
 };

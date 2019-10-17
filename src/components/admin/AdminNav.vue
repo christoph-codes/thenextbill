@@ -12,7 +12,7 @@
             <a href="#">{{ admin.fname }}</a>
             <ul class="uk-nav-sub">
               <li>
-                <router-link to="/settings">Settings</router-link>
+                <router-link to="/admin/settings">Settings</router-link>
               </li>
               <li><a @click="logout">Logout</a></li>
             </ul>

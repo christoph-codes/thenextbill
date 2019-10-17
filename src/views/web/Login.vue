@@ -5,9 +5,9 @@
         <div class="narrow">
           <MainLogo />
           <h1 class="page-header">Login</h1>
-          <form @submit.prevent="login">
-            <input type="email" name="user_email" v-model="email" />
-            <input type="password" name="user_password" v-model="password" />
+          <form @submit.prevent="login" autocomplete="on">
+            <input type="email" name="current_email" v-model="email" />
+            <input type="password" name="current_password" v-model="password" />
             <input type="submit" value="Login" class="btn prime" />
           </form>
           <p v-if="feedback">{{ feedback }}</p>

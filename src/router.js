@@ -6,13 +6,15 @@ import Home from "./views/Home.vue";
 import Login from "./views/web/Login.vue";
 import CreateAccount from "./views/web/CreateAccount.vue";
 import ForgotPassword from "./views/web/ForgotPassword.vue";
+import PageNotFound from "./views/web/NotFound.vue";
 import Admin from "./views/admin/Admin.vue";
 // Admin Templatees
 import AdminDashboard from "./views/admin/AdminDashboard.vue";
 import AdminAddBill from "./views/admin/AdminAddBill.vue";
 import AdminEditBill from "./views/admin/AdminEditBill.vue";
 import AdminBills from "./views/admin/AdminBills.vue";
-import PageNotFound from "./views/web/NotFound.vue";
+import AdminSettings from "./views/admin/AdminSettings.vue";
+
 //Libraries
 import firebase from "firebase";
 
@@ -69,6 +71,11 @@ const router = new Router({
           path: "bills",
           name: "admin-bills",
           component: AdminBills
+        },
+        {
+          path: "settings",
+          name: "admin-settings",
+          component: AdminSettings
         }
       ]
     },

@@ -1,6 +1,6 @@
 <template>
   <div class="admin-settings">
-    <h1 class="dashboard-header">Admin Settings</h1>
+    <h1 class="dashboard-header">Settings</h1>
     <div class="bills-table">
       <table
         class="uk-table uk-table-hover uk-table-responsive uk-table-divider"

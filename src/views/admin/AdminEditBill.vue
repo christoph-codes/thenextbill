@@ -117,6 +117,10 @@ export default {
           lower: true
         });
 
+        // let toTimestamp = this.newDate.getTime();
+        // let dateIt = new Date(toTimestamp);
+        // console.log(dateIt);
+
         // adding a new bill data to the database
         db.collection("bills")
           .doc(this.bill.id)
@@ -124,7 +128,7 @@ export default {
             amount: this.bill.amount,
             category: this.bill.category,
             // due_day: this.fbDate,
-            due_day: new Date(this.newDate).seconds * 1000,
+            due_day: this.fbDate,
             name: this.bill.name,
             priority: this.bill.priority,
             recurrence: this.bill.recurrence,
@@ -156,7 +160,7 @@ export default {
   computed: {
     // Convert Date String to Firebase Timestamp
     fbDate() {
-      const date = new Date(this.convertedDate).getTime();
+      const date = new Date(this.newDate);
       // console.log(date);
       return date;
     },

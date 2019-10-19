@@ -14,6 +14,7 @@ import AdminAddBill from "./views/admin/AdminAddBill.vue";
 import AdminEditBill from "./views/admin/AdminEditBill.vue";
 import AdminBills from "./views/admin/AdminBills.vue";
 import AdminSettings from "./views/admin/AdminSettings.vue";
+import AdminEditSettings from "./views/admin/AdminEditSettings.vue";
 
 //Libraries
 import firebase from "firebase";
@@ -76,6 +77,11 @@ const router = new Router({
           path: "settings",
           name: "admin-settings",
           component: AdminSettings
+        },
+        {
+          path: "edit-settings",
+          name: "admin-edit-settings",
+          component: AdminEditSettings
         }
       ]
     },

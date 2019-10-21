@@ -4,7 +4,7 @@
       <img
         class="dashboard-logo"
         alt="The Next Bill Dashboard"
-        src="@/assets/tnb-full_logo.png"
+        src="@/assets/side-nav-logo-gray@2x.png"
       />
       <hr />
       <ul>
@@ -30,6 +30,9 @@ export default {
   padding: 0 30px;
   min-height: 100vh;
   height: 100%;
+}
+.admin-side-nav hr {
+  border-top: 1px solid var(--gray);
 }
 .admin-side-nav ul {
   padding: 0;

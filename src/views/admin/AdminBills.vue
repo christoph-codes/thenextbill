@@ -11,7 +11,7 @@
             <th>Amount</th>
             <th>Due Date</th>
             <th>Category</th>
-            <th>Priority</th>
+            <th>Importance</th>
             <th>Recurrence</th>
             <th>Paid Status</th>
             <th></th>
@@ -27,13 +27,35 @@
               </div>
             </td>
             <td>{{ bill.category }}</td>
-            <td>{{ bill.priority }}</td>
+            <td>
+              <div v-if="bill.importance == '3'">
+                <img
+                  src="@/assets/low-importance-icon@2x.png"
+                  :alt="bill.name"
+                  class="importance_icon"
+                />
+              </div>
+              <div v-if="bill.importance == '2'">
+                <img
+                  src="@/assets/medium-importance-icon@2x.png"
+                  :alt="bill.name"
+                  class="importance_icon"
+                />
+              </div>
+              <div v-if="bill.importance == '1'">
+                <img
+                  src="@/assets/high-importance-icon@2x.png"
+                  :alt="bill.name"
+                  class="importance_icon"
+                />
+              </div>
+            </td>
             <td>{{ bill.recurrence }}</td>
             <td v-if="!bill.paid_status">
-              <a href="" @click="toggle(bill)">Unpaid</a>
+              <a class="modal" uk-toggle="target: #toggle-bill-modal" @click="sendBill(bill)">UnPaid</a>
             </td>
             <td v-else>
-              <a href="" @click="toggle(bill)">Paid</a>
+              <a class="modal" uk-toggle="target: #toggle-bill-modal" @click="sendBill(bill)">Paid</a>
             </td>
             <td>
               <router-link
@@ -44,6 +66,30 @@
                 >Edit Bill</router-link
               >
             </td>
+            <div
+              id="toggle-bill-modal"
+              class="add-bill-modal uk-flex-top"
+              uk-modal
+            >
+              <div
+                class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical"
+              >
+                <h2 v-if="selectedBill.paid_status" class="uk-modal-title">
+                  Are you sure you want to mark {{ selectedBill.name }} as unpaid?
+                </h2>
+                <h2 v-if="!selectedBill.paid_status" class="uk-modal-title">
+                  Are you sure you want to mark {{ selectedBill.name }} as Paid?
+                </h2>
+                <a
+                  class="uk-modal-close btn prime"
+                  @click="toggle(selectedBill)"
+                  href=""
+                  >Confirm</a
+                >
+                <a class="uk-modal-close btn secon" @click="selectedBill = '' " href="">Cancel</a>
+                <a class="uk-modal-close-default" @click="selectedBill = '' " href="" uk-close></a>
+              </div>
+            </div>
           </tr>
         </tbody>
       </table>
@@ -66,7 +112,8 @@ export default {
     return {
       admin: {},
       bills: [],
-      feedback: null
+      feedback: null,
+      selectedBill: ''
     };
   },
   methods: {
@@ -88,7 +135,7 @@ export default {
           .where("user_id", "==", this.admin.user_id)
           .orderBy("due_day")
           .orderBy("amount")
-          .orderBy("priority");
+          .orderBy("importance");
         bills.onSnapshot(snapshot => {
           snapshot.docChanges().forEach(change => {
             let bill = change.doc.data();
@@ -98,11 +145,35 @@ export default {
               this.bills.push(bill);
             }
             if (change.type === "modified") {
-              //console.log("Bill updated: " + bill.name);
+              // console.log("Bill updated: " + bill.name);
             }
           });
         });
       });
+    },
+    sendBill(bill) {
+      this.selectedBill = bill;
+      // console.log(this.selectedBill);
+    },
+    toggle(bill) {
+        db.collection("bills")
+          .doc(bill.id)
+          .update({
+            // toggle paid status on server
+            paid_status: !this.selectedBill.paid_status
+          })
+          .then(() => {
+            // toggle paid status on local
+            bill.paid_status = !bill.paid_status;
+            console.log(bill.name)
+            // console.log("Paid Status Updated");
+            this.selectedBill = '';
+          })
+          .catch(err => {
+            // catch errors if something goes wrong
+            // console.log(err);
+            this.feedback = err;
+          });
     },
     convertTimestamp(timestamp) {
       if (!timestamp) return;
@@ -114,37 +185,7 @@ export default {
 
       date = mm + "/" + dd + "/" + yyyy;
       return date;
-
-      // let date = timestamp.toDate();
-      // let mm = date.getMonth();
-      // let dd = date.getDate();
-      // let yyyy = date.getFullYear();
-
-      // date = mm + "/" + dd + "/" + yyyy;
-      // return date;
     }
-
-    // toggle(bill) {
-    //   db.collection("bills")
-    //     .doc(bill.id)
-    //     .update({
-    //       // toggle paid status on server
-    //       // paid_status: !bill.paid_status
-    //     })
-    //     .then(() => {
-    //       console.log("This is the new paid status" + bill.paid_status)
-    //       // toggle paid status on local
-    //       // bill.paid_status = !this.bill.paid_status;
-    //       // push this bill to local bills
-    //       // this.bills.push(bill);
-    //       // console.log("Paid Status Updated");
-    //     })
-    //     .catch(err => {
-    //       // catch errors if something goes wrong
-    //       // console.log(err);
-    //       this.feedback = err;
-    //     });
-    // }
   },
   created() {
     this.getUserAndBills();
@@ -155,6 +196,10 @@ export default {
 <style>
 .uk-table th {
   color: var(--gray);
+}
+.uk-table td {
+    padding: 10px 12px;
+    font-size: 12px;
 }
 .add-to-bills {
   text-align: center;

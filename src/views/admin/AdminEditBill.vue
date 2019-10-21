@@ -27,8 +27,8 @@
           min="0"
           max="3"
           step="1"
-          placeholder="Priority Level"
-          v-model="bill.priority"
+          placeholder="Importance"
+          v-model="bill.importance"
         />
         <select required v-model="bill.recurrence">
           <option value="" disabled selected>Bill Recurrence</option>
@@ -130,7 +130,7 @@ export default {
             // due_day: this.fbDate,
             due_day: this.fbDate,
             name: this.bill.name,
-            priority: this.bill.priority,
+            importance: this.bill.importance,
             recurrence: this.bill.recurrence,
             paid_status: this.bill.paid_status,
             slug: this.bill.slug

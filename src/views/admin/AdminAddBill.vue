@@ -28,14 +28,22 @@
           <option value="entertainment">Entertainment</option>
           <option value="misc">MISC</option>
         </select>
-        <input
+        <!-- <input
           type="number"
           min="0"
           max="3"
           step="1"
-          placeholder="Priority Level"
-          v-model="priority"
-        />
+          placeholder="How Important Is This Bill To You?"
+          v-model="importance"
+        /> -->
+        <select required v-model="importance">
+          <option value="" disabled selected
+            >How Important Is This Bill To You?</option
+          >
+          <option value="1">Very</option>
+          <option value="2">Medium</option>
+          <option value="3">Low</option>
+        </select>
         <select required v-model="recurrence">
           <option value="" disabled selected>Bill Recurrence</option>
           <option value="weekly">Weekly</option>
@@ -68,7 +76,7 @@ export default {
       category: null,
       due_day: null,
       name: null,
-      priority: null,
+      importance: null,
       recurrence: null,
       user_id: null,
       slug: null,
@@ -85,7 +93,7 @@ export default {
         this.name &&
         this.amount &&
         this.category &&
-        this.priority &&
+        this.importance &&
         this.due_day &&
         this.recurrence
       ) {
@@ -104,7 +112,7 @@ export default {
             category: this.category,
             due_day: this.fbDate,
             name: this.name,
-            priority: this.priority,
+            importance: this.importance,
             recurrence: this.recurrence,
             user_id: this.admin.user_id,
             creationdate: this.fbCreationDate,
@@ -144,7 +152,7 @@ export default {
           .where("user_id", "==", this.admin.user_id)
           .orderBy("due_day")
           .orderBy("amount")
-          .orderBy("priority");
+          .orderBy("importance");
         bills.onSnapshot(snapshot => {
           snapshot.docChanges().forEach(change => {
             let bill = change.doc.data();

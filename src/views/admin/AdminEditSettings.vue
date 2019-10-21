@@ -27,7 +27,7 @@
         </table>
 
         <input type="submit" value="Update Settings" class="btn prime" />
-        <router-link to="/admin-settings" class="link"
+        <router-link to="/admin/settings" class="link"
           ><i class="uk-icon-close"></i>Cancel</router-link
         >
       </form>

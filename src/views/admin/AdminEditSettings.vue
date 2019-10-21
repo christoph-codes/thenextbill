@@ -90,3 +90,9 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+td.setting-label {
+    text-align: right;
+}
+</style>

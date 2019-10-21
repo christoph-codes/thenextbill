@@ -44,4 +44,25 @@ div#adminHome {
 .dashboard {
   padding-bottom: 50px;
 }
+.category-tag {
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+.greenbg {
+    background: var(--secon);
+}
+.orangebg {
+    background: #FF4F0F;
+}
+.purplebg {
+  background: #9E25F6;
+}
+.bluebg {
+  background: #21C6F7;
+}
+.redbg {
+  background: #B12929;
+}
 </style>

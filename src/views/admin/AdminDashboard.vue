@@ -36,7 +36,19 @@
                 <div class="uk-width-1-2">
                   <ul class="bill-details-value">
                     <li>
-                      <div v-if="bill.category">{{ bill.category }}</div>
+                      <div v-if="bill.category">
+                        <span
+                          :class="{
+                            orangebg: bill.category === 'entertainment',
+                            bluebg: bill.category === 'food',
+                            purplebg: bill.category === 'transportation',
+                            greenbg: bill.category === 'utilities',
+                            redbg: bill.category === 'housing'
+                          }"
+                          class="category-tag"
+                          >{{ bill.category }}</span
+                        >
+                      </div>
                     </li>
                     <li>
                       <div v-if="bill.recurrence">{{ bill.recurrence }}</div>
@@ -69,7 +81,12 @@
               </div>
             </div>
             <div class="bill-paid-btn">
-              <a class="btn modal" uk-toggle="target: #toggle-bill-modal" @click="sendBill(bill)">Mark as Paid</a>
+              <a
+                class="btn modal"
+                uk-toggle="target: #toggle-bill-modal"
+                @click="sendBill(bill)"
+                >Mark as Paid</a
+              >
             </div>
             <div
               id="toggle-bill-modal"
@@ -80,7 +97,8 @@
                 class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical"
               >
                 <h2 v-if="selectedBill.paid_status" class="uk-modal-title">
-                  Are you sure you want to mark {{ selectedBill.name }} as unpaid?
+                  Are you sure you want to mark {{ selectedBill.name }} as
+                  unpaid?
                 </h2>
                 <h2 v-if="!selectedBill.paid_status" class="uk-modal-title">
                   Are you sure you want to mark {{ selectedBill.name }} as Paid?
@@ -91,8 +109,18 @@
                   href=""
                   >Confirm</a
                 >
-                <a class="uk-modal-close btn secon" @click="selectedBill = '' " href="">Cancel</a>
-                <a class="uk-modal-close-default" @click="selectedBill = '' " href="" uk-close></a>
+                <a
+                  class="uk-modal-close btn secon"
+                  @click="selectedBill = ''"
+                  href=""
+                  >Cancel</a
+                >
+                <a
+                  class="uk-modal-close-default"
+                  @click="selectedBill = ''"
+                  href=""
+                  uk-close
+                ></a>
               </div>
             </div>
           </div>
@@ -125,7 +153,7 @@ export default {
       bills: [],
       feedback: null,
       bill_message: "Pay this today!",
-      selectedBill: ''
+      selectedBill: ""
     };
   },
   methods: {
@@ -165,27 +193,27 @@ export default {
       });
     },
     sendBill(bill) {
-        this.selectedBill = bill;
+      this.selectedBill = bill;
     },
     toggle(bill) {
-        db.collection("bills")
-          .doc(bill.id)
-          .update({
-            // toggle paid status on server
-            paid_status: !this.selectedBill.paid_status
-          })
-          .then(() => {
-            // toggle paid status on local
-            bill.paid_status = !bill.paid_status;
-            console.log(bill.name)
-            // console.log("Paid Status Updated");
-            this.selectedBill = '';
-          })
-          .catch(err => {
-            // catch errors if something goes wrong
-            // console.log(err);
-            this.feedback = err;
-          });
+      db.collection("bills")
+        .doc(bill.id)
+        .update({
+          // toggle paid status on server
+          paid_status: !this.selectedBill.paid_status
+        })
+        .then(() => {
+          // toggle paid status on local
+          bill.paid_status = !bill.paid_status;
+          console.log(bill.name);
+          // console.log("Paid Status Updated");
+          this.selectedBill = "";
+        })
+        .catch(err => {
+          // catch errors if something goes wrong
+          // console.log(err);
+          this.feedback = err;
+        });
     },
     convertTimestamp(timestamp) {
       let date = timestamp.toDate();

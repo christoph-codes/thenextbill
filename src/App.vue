@@ -112,8 +112,10 @@ p {
   max-width: 600px;
   padding: 0 30px;
 }
-form {
-  text-align: center;
+form label {
+    font-weight: bold;
+    color: var(--gray);
+    font-size: 14px;
 }
 input[type="text"],
 input[type="email"],
@@ -125,8 +127,7 @@ input[type="password"] {
   width: 100%;
   height: 30px;
   border: solid var(--wgray) 1px;
-  padding: 5px 0;
-  text-align: center;
+  padding: 5px;
   font-size: 16px;
   color: var(--prime);
   border-radius: 5px;
@@ -140,12 +141,25 @@ input[type="date"],
 input[type="password"] {
   height: 30px;
 }
-input::placeholder {
+/* input::placeholder {
   color: var(--lgray);
-}
+} */
 select {
-  height: 40px;
-  background: white;
+    height: 40px;
+    background: white;
+    width: calc(100% + 10px);
+}
+form input[type="submit"] {
+    text-align: center;
+    display: block;
+    margin: 0 auto 10px;
+}
+form a.link {
+    text-align: center;
+}
+input[type=date]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    display: none;
 }
 section.hero {
   position: relative;

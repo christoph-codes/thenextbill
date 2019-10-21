@@ -9,7 +9,12 @@
         <input type="date" v-if="convertedDate" v-model="newDate" />
         <!-- <input type="date" v-model="fbDate" /> -->
         <label>Bill Amount:</label>
-        <input type="number" placeholder="Bill Amount" v-model="bill.amount" />
+        <input
+          type="number"
+          step="0.01"
+          placeholder="Bill Amount"
+          v-model="bill.amount"
+        />
         <label>Bill Category</label>
         <select required v-model="bill.category">
           <option value="" disabled>Choose Bill Category</option>

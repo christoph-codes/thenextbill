@@ -8,7 +8,12 @@
         <label>Bill Due Date:</label>
         <input type="date" v-model="due_day" name="dueday" />
         <label>Bill Amount:</label>
-        <input type="number" placeholder="Bill Amount" v-model="amount" />
+        <input
+          type="number"
+          step="0.01"
+          placeholder="Bill Amount"
+          v-model="amount"
+        />
         <label>Bill Category</label>
         <select required v-model="category">
           <option disabled value=" ">Please Choose</option>

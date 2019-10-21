@@ -38,6 +38,13 @@
           <option value="annually">Annually</option>
           <option value="one-time">One-Time</option>
         </select>
+
+        <label>Has this bill been paid?</label>
+        <select required v-model="bill.paid_status">
+          <option disabled value=" ">Please Choose</option>
+          <option :value="true">Yes</option>
+          <option :value="false">No</option>
+        </select>
         <input type="submit" value="Update Bill" class="btn prime" />
         <a uk-toggle="target: #delete-bill" class="link"
           ><i class="uk-icon-close"></i>Delete Bill</a

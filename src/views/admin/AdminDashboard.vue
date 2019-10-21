@@ -7,6 +7,9 @@
         class="uk-width-1-3@m uk-width-1-1@s bill"
       >
         <div class="bill-card">
+          <div v-if="pastDueCheck(bill.due_day)" class="past-due-flag">
+            <img src="@/assets/past-due-flag@2x.png" alt="Past Due Bill" />
+          </div>
           <div class="bill-message">
             <p v-if="bill_message">{{ bill_message }}</p>
           </div>
@@ -173,6 +176,7 @@ export default {
         let bills = db
           .collection("bills")
           .where("user_id", "==", this.admin.user_id)
+          .orderBy("paid_status")
           .orderBy("due_day")
           .orderBy("amount")
           .orderBy("importance");
@@ -223,6 +227,19 @@ export default {
 
       date = mm + "/" + dd + "/" + yyyy;
       return date;
+    },
+    pastDueCheck(dueday) {
+      let billsdate = dueday.toDate();
+      let currentDate = new Date();
+
+      // console.log(billsdate);
+      // console.log(currentDate);
+
+      if (billsdate < currentDate) {
+        return true;
+      } else {
+        return false;
+      }
     }
   },
   created() {
@@ -272,12 +289,17 @@ p.bill-amount {
 }
 .bill-message {
   padding: 15px;
-  text-align: center;
+  text-align: left;
   background: var(--lgray);
 }
 .bill-message p {
   color: var(--gray);
   margin: 0px;
+}
+.past-due-flag {
+  float: right;
+  margin-right: -24px;
+  margin-top: 8px;
 }
 .bill-details ul {
   list-style: none;

@@ -165,6 +165,11 @@ input[type="date"]::-webkit-inner-spin-button {
   -webkit-appearance: none;
   display: none;
 }
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 section.hero {
   position: relative;
   height: calc(100vh - 20px);

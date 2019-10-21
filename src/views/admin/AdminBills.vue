@@ -68,16 +68,15 @@
                 class="modal"
                 uk-toggle="target: #toggle-bill-modal"
                 @click="sendBill(bill)"
-                >UnPaid</a
+                ><span
+                  class="past-due-tag"
+                  v-if="pastDueCheck(bill.due_day) && !bill.paid_status"
+                  >Past Due</span
+                ><span v-else>Mark as Paid</span></a
               >
             </td>
             <td v-else>
-              <a
-                class="modal"
-                uk-toggle="target: #toggle-bill-modal"
-                @click="sendBill(bill)"
-                >Paid</a
-              >
+              <b>Paid</b>
             </td>
             <td>
               <router-link
@@ -166,6 +165,7 @@ export default {
         let bills = db
           .collection("bills")
           .where("user_id", "==", this.admin.user_id)
+          .orderBy("paid_status")
           .orderBy("due_day")
           .orderBy("amount")
           .orderBy("importance");
@@ -218,6 +218,19 @@ export default {
 
       date = mm + "/" + dd + "/" + yyyy;
       return date;
+    },
+    pastDueCheck(dueday) {
+      let billsdate = dueday.toDate();
+      let currentDate = new Date();
+
+      // console.log(billsdate);
+      // console.log(currentDate);
+
+      if (billsdate < currentDate) {
+        return true;
+      } else {
+        return false;
+      }
     }
   },
   created() {
@@ -269,5 +282,13 @@ tbody tr:first-child {
 .uk-table-hover > tr:hover,
 .uk-table-hover tbody tr:hover {
   background: #e5e6f0;
+}
+span.past-due-tag {
+  border: solid 1px var(--danger);
+  border-radius: 3px;
+  padding: 3px;
+  background: #ffebf0;
+  color: var(--danger);
+  font-weight: bold;
 }
 </style>

@@ -3,18 +3,16 @@
     <h1 class="dashboard-header">Edit {{ bill.name }}</h1>
     <div class="narrow">
       <form class="edit-bill-form" @submit.prevent="editBill">
-        <input type="text" placeholder="Bill Name" v-model="bill.name" />
+        <label>Bill Name:</label>
+        <input type="text" placeholder="Rent" v-model="bill.name" />
+        <label>Bill Due Date:</label>
         <input type="date" v-if="convertedDate" v-model="newDate" />
         <!-- <input type="date" v-model="fbDate" /> -->
-        <input
-          type="number"
-          min="0.01"
-          step="0.01"
-          placeholder="Bill Amount"
-          v-model="bill.amount"
-        />
+        <label>Bill Amount:</label>
+        <input type="number" placeholder="Bill Amount" v-model="bill.amount" />
+        <label>Bill Category</label>
         <select required v-model="bill.category">
-          <option value="" disabled selected>Choose Bill Category</option>
+          <option value="" disabled>Choose Bill Category</option>
           <option value="housing">Housing</option>
           <option value="food">Food</option>
           <option value="transportation">Transportation</option>
@@ -22,14 +20,15 @@
           <option value="entertainment">Entertainment</option>
           <option value="misc">MISC</option>
         </select>
-        <input
-          type="number"
-          min="0"
-          max="3"
-          step="1"
-          placeholder="Importance"
-          v-model="bill.importance"
-        />
+        <label>How Important Is This Bill To You?</label>
+        <select required v-model="bill.importance">
+          <option disabled value=" ">Please Choose</option>
+          <option value="1">Very</option>
+          <option value="2">Medium</option>
+          <option value="3">Low</option>
+        </select>
+
+        <label>Bill Recurrence</label>
         <select required v-model="bill.recurrence">
           <option value="" disabled selected>Bill Recurrence</option>
           <option value="weekly">Weekly</option>

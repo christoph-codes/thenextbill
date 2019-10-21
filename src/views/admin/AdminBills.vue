@@ -26,7 +26,19 @@
                 {{ convertTimestamp(bill.due_day) }}
               </div>
             </td>
-            <td>{{ bill.category }}</td>
+            <td>
+              <span
+                :class="{
+                  orangebg: bill.category === 'entertainment',
+                  bluebg: bill.category === 'food',
+                  purplebg: bill.category === 'transportation',
+                  greenbg: bill.category === 'utilities',
+                  redbg: bill.category === 'housing'
+                }"
+                class="category-tag"
+                >{{ bill.category }}</span
+              >
+            </td>
             <td>
               <div v-if="bill.importance == '3'">
                 <img
@@ -52,10 +64,20 @@
             </td>
             <td>{{ bill.recurrence }}</td>
             <td v-if="!bill.paid_status">
-              <a class="modal" uk-toggle="target: #toggle-bill-modal" @click="sendBill(bill)">UnPaid</a>
+              <a
+                class="modal"
+                uk-toggle="target: #toggle-bill-modal"
+                @click="sendBill(bill)"
+                >UnPaid</a
+              >
             </td>
             <td v-else>
-              <a class="modal" uk-toggle="target: #toggle-bill-modal" @click="sendBill(bill)">Paid</a>
+              <a
+                class="modal"
+                uk-toggle="target: #toggle-bill-modal"
+                @click="sendBill(bill)"
+                >Paid</a
+              >
             </td>
             <td>
               <router-link
@@ -75,7 +97,8 @@
                 class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical"
               >
                 <h2 v-if="selectedBill.paid_status" class="uk-modal-title">
-                  Are you sure you want to mark {{ selectedBill.name }} as unpaid?
+                  Are you sure you want to mark {{ selectedBill.name }} as
+                  unpaid?
                 </h2>
                 <h2 v-if="!selectedBill.paid_status" class="uk-modal-title">
                   Are you sure you want to mark {{ selectedBill.name }} as Paid?
@@ -86,8 +109,18 @@
                   href=""
                   >Confirm</a
                 >
-                <a class="uk-modal-close btn secon" @click="selectedBill = '' " href="">Cancel</a>
-                <a class="uk-modal-close-default" @click="selectedBill = '' " href="" uk-close></a>
+                <a
+                  class="uk-modal-close btn secon"
+                  @click="selectedBill = ''"
+                  href=""
+                  >Cancel</a
+                >
+                <a
+                  class="uk-modal-close-default"
+                  @click="selectedBill = ''"
+                  href=""
+                  uk-close
+                ></a>
               </div>
             </div>
           </tr>
@@ -113,7 +146,7 @@ export default {
       admin: {},
       bills: [],
       feedback: null,
-      selectedBill: ''
+      selectedBill: ""
     };
   },
   methods: {
@@ -156,24 +189,24 @@ export default {
       // console.log(this.selectedBill);
     },
     toggle(bill) {
-        db.collection("bills")
-          .doc(bill.id)
-          .update({
-            // toggle paid status on server
-            paid_status: !this.selectedBill.paid_status
-          })
-          .then(() => {
-            // toggle paid status on local
-            bill.paid_status = !bill.paid_status;
-            console.log(bill.name)
-            // console.log("Paid Status Updated");
-            this.selectedBill = '';
-          })
-          .catch(err => {
-            // catch errors if something goes wrong
-            // console.log(err);
-            this.feedback = err;
-          });
+      db.collection("bills")
+        .doc(bill.id)
+        .update({
+          // toggle paid status on server
+          paid_status: !this.selectedBill.paid_status
+        })
+        .then(() => {
+          // toggle paid status on local
+          bill.paid_status = !bill.paid_status;
+          // ********* USE THIS CONSOLE LOG FOR TESTING *********console.log(bill.name);
+          // console.log("Paid Status Updated");
+          this.selectedBill = "";
+        })
+        .catch(err => {
+          // catch errors if something goes wrong
+          // console.log(err);
+          this.feedback = err;
+        });
     },
     convertTimestamp(timestamp) {
       if (!timestamp) return;
@@ -198,8 +231,8 @@ export default {
   color: var(--gray);
 }
 .uk-table td {
-    padding: 10px 12px;
-    font-size: 12px;
+  padding: 10px 12px;
+  font-size: 12px;
 }
 .add-to-bills {
   text-align: center;

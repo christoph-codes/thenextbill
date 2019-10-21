@@ -30,7 +30,7 @@
                   <ul class="bill-details-label">
                     <li>Category:</li>
                     <li>Recurrence:</li>
-                    <li>Priority:</li>
+                    <li>Importance:</li>
                   </ul>
                 </div>
                 <div class="uk-width-1-2">
@@ -42,37 +42,57 @@
                       <div v-if="bill.recurrence">{{ bill.recurrence }}</div>
                     </li>
                     <li>
-                      <div v-if="bill.priority">{{ bill.priority }}</div>
+                      <div v-if="bill.importance == '3'">
+                        <img
+                          src="@/assets/low-importance-icon@2x.png"
+                          :alt="bill.name"
+                          class="importance_icon"
+                        />
+                      </div>
+                      <div v-if="bill.importance == '2'">
+                        <img
+                          src="@/assets/medium-importance-icon@2x.png"
+                          :alt="bill.name"
+                          class="importance_icon"
+                        />
+                      </div>
+                      <div v-if="bill.importance == '1'">
+                        <img
+                          src="@/assets/high-importance-icon@2x.png"
+                          :alt="bill.name"
+                          class="importance_icon"
+                        />
+                      </div>
                     </li>
                   </ul>
                 </div>
               </div>
             </div>
-            <div class="bill-paid-btn" v-if="bill.paid != true">
-              <a class="btn" @click="toggle(bill)">Mark as Paid</a>
-              <a class="btn modal" uk-toggle="target: #add-bill-modal"
-                >Open Modal</a
-              >
+            <div class="bill-paid-btn">
+              <a class="btn modal" uk-toggle="target: #toggle-bill-modal" @click="sendBill(bill)">Mark as Paid</a>
             </div>
             <div
-              id="add-bill-modal"
+              id="toggle-bill-modal"
               class="add-bill-modal uk-flex-top"
               uk-modal
             >
               <div
                 class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical"
               >
-                <h2 class="uk-modal-title">
-                  Are you sure you want to mark {{ bill.name }} as paid?
+                <h2 v-if="selectedBill.paid_status" class="uk-modal-title">
+                  Are you sure you want to mark {{ selectedBill.name }} as unpaid?
+                </h2>
+                <h2 v-if="!selectedBill.paid_status" class="uk-modal-title">
+                  Are you sure you want to mark {{ selectedBill.name }} as Paid?
                 </h2>
                 <a
                   class="uk-modal-close btn prime"
-                  @click="toggle(bill)"
+                  @click="toggle(selectedBill)"
                   href=""
                   >Confirm</a
                 >
-                <a class="uk-modal-close btn secon" href="">Cancel</a>
-                <a class="uk-modal-close-default" href="" uk-close></a>
+                <a class="uk-modal-close btn secon" @click="selectedBill = '' " href="">Cancel</a>
+                <a class="uk-modal-close-default" @click="selectedBill = '' " href="" uk-close></a>
               </div>
             </div>
           </div>
@@ -104,7 +124,8 @@ export default {
       admin: {},
       bills: [],
       feedback: null,
-      bill_message: "Pay this today!"
+      bill_message: "Pay this today!",
+      selectedBill: ''
     };
   },
   methods: {
@@ -126,7 +147,7 @@ export default {
           .where("user_id", "==", this.admin.user_id)
           .orderBy("due_day")
           .orderBy("amount")
-          .orderBy("priority");
+          .orderBy("importance");
         bills.onSnapshot(snapshot => {
           snapshot.docChanges().forEach(change => {
             let bill = change.doc.data();
@@ -137,29 +158,34 @@ export default {
             }
             if (change.type === "modified") {
               // console.log("Bill updated: " + bill.name);
-              this.bills.push(bill);
+              // this.bills.push(bill);
             }
           });
         });
       });
     },
+    sendBill(bill) {
+        this.selectedBill = bill;
+    },
     toggle(bill) {
-      db.collection("bills")
-        .doc(bill.id)
-        .update({
-          // toggle paid status on server
-          paid_status: !bill.paid_status
-        })
-        .then(() => {
-          // toggle paid status on local
-          bill.paid_status = !this.paid_status;
-          // console.log("Paid Status Updated");
-        })
-        .catch(err => {
-          // catch errors if something goes wrong
-          // console.log(err);
-          this.feedback = err;
-        });
+        db.collection("bills")
+          .doc(bill.id)
+          .update({
+            // toggle paid status on server
+            paid_status: !this.selectedBill.paid_status
+          })
+          .then(() => {
+            // toggle paid status on local
+            bill.paid_status = !bill.paid_status;
+            console.log(bill.name)
+            // console.log("Paid Status Updated");
+            this.selectedBill = '';
+          })
+          .catch(err => {
+            // catch errors if something goes wrong
+            // console.log(err);
+            this.feedback = err;
+          });
     },
     convertTimestamp(timestamp) {
       let date = timestamp.toDate();
@@ -304,5 +330,8 @@ span.bill-details-label {
 }
 .uk-modal .uk-modal-title {
   color: var(--prime);
+}
+img.importance_icon {
+  max-height: 23px;
 }
 </style>

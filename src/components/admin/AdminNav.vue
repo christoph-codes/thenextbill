@@ -12,7 +12,7 @@
             <a href="#">{{ admin.fname }}</a>
             <ul class="uk-nav-sub">
               <li>
-                <router-link to="/settings">Settings</router-link>
+                <router-link to="/admin/settings">Settings</router-link>
               </li>
               <li><a @click="logout">Logout</a></li>
             </ul>
@@ -57,7 +57,7 @@ export default {
     // find the logged in user record and grab its data
     let user = db.collection("users").where("user_id", "==", admin.uid);
 
-    user.get().then(snapshot => {
+    user.onSnapshot(snapshot => {
       snapshot.forEach(doc => {
         (this.admin = doc.data()), (this.admin.id = doc.id);
       });

@@ -27,8 +27,8 @@
           min="0"
           max="3"
           step="1"
-          placeholder="Priority Level"
-          v-model="bill.priority"
+          placeholder="Importance"
+          v-model="bill.importance"
         />
         <select required v-model="bill.recurrence">
           <option value="" disabled selected>Bill Recurrence</option>
@@ -117,6 +117,10 @@ export default {
           lower: true
         });
 
+        // let toTimestamp = this.newDate.getTime();
+        // let dateIt = new Date(toTimestamp);
+        // console.log(dateIt);
+
         // adding a new bill data to the database
         db.collection("bills")
           .doc(this.bill.id)
@@ -124,9 +128,9 @@ export default {
             amount: this.bill.amount,
             category: this.bill.category,
             // due_day: this.fbDate,
-            due_day: new Date(this.newDate).seconds * 1000,
+            due_day: this.fbDate,
             name: this.bill.name,
-            priority: this.bill.priority,
+            importance: this.bill.importance,
             recurrence: this.bill.recurrence,
             paid_status: this.bill.paid_status,
             slug: this.bill.slug
@@ -156,7 +160,7 @@ export default {
   computed: {
     // Convert Date String to Firebase Timestamp
     fbDate() {
-      const date = new Date(this.convertedDate).getTime();
+      const date = new Date(this.newDate);
       // console.log(date);
       return date;
     },

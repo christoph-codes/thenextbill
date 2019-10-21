@@ -9,8 +9,8 @@
       <hr />
       <ul>
         <li><router-link to="/admin/dashboard">Dashboard</router-link></li>
+        <li><router-link to="/admin/bills">List View</router-link></li>
         <li><router-link to="/admin/add-bill">Add Bill</router-link></li>
-        <li><router-link to="/admin/bills">Edit Bills</router-link></li>
         <li><router-link to="/admin/settings">Settings</router-link></li>
       </ul>
     </div>

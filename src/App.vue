@@ -88,6 +88,10 @@ a,
 a * {
   transition: 0.3s;
 }
+a,
+.uk-link {
+  color: var(--terti);
+}
 a.link {
   display: block;
   margin: 10px 0;

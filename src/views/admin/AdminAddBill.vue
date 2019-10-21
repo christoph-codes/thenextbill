@@ -3,19 +3,14 @@
     <h1 class="dashboard-header">Add Bill</h1>
     <div class="narrow">
       <form class="add-bill-form" @submit.prevent="addBill">
-        <label>Bill Name:</label> <input type="text" placeholder="Rent" v-model="name" />
-        <label>Bill Due Date:</label> <input
-          type="date"
-          v-model="due_day"
-          name="dueday"
-        />
-        <label>Bill Amount:</label> <input
-          type="number"
-          placeholder="Bill Amount"
-          v-model="amount"
-        />
-        <label>Bill Category</label> <select required v-model="category">
-          
+        <label>Bill Name:</label>
+        <input type="text" placeholder="Rent" v-model="name" />
+        <label>Bill Due Date:</label>
+        <input type="date" v-model="due_day" name="dueday" />
+        <label>Bill Amount:</label>
+        <input type="number" placeholder="Bill Amount" v-model="amount" />
+        <label>Bill Category</label>
+        <select required v-model="category">
           <option disabled value=" ">Please Choose</option>
           <option value="housing">Housing</option>
           <option value="food">Food</option>
@@ -32,15 +27,15 @@
           placeholder="How Important Is This Bill To You?"
           v-model="importance"
         /> -->
-        <label>How Important Is This Bill To You?</label> <select required v-model="importance">
-          <option disabled value=" "
-            >Please Choose</option
-          >
+        <label>How Important Is This Bill To You?</label>
+        <select required v-model="importance">
+          <option disabled value=" ">Please Choose</option>
           <option value="1">Very</option>
           <option value="2">Medium</option>
           <option value="3">Low</option>
         </select>
-        <label>Bill Recurrence</label><select required v-model="recurrence">
+        <label>Bill Recurrence</label
+        ><select required v-model="recurrence">
           <option value=" " disabled>Please Choose</option>
           <option value="weekly">Weekly</option>
           <option value="bi-weekly">Bi-weekly</option>
@@ -52,7 +47,7 @@
         <input type="submit" value="Add Bill" class="btn prime" />
         <router-link to="/admin/dashboard" class="link">Cancel</router-link>
       </form>
-      
+
       <p class="text-danger" v-if="feedback">{{ feedback }}</p>
     </div>
   </div>

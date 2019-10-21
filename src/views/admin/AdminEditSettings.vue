@@ -93,6 +93,6 @@ export default {
 
 <style scoped>
 td.setting-label {
-    text-align: right;
+  text-align: right;
 }
 </style>

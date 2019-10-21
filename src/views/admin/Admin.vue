@@ -45,24 +45,24 @@ div#adminHome {
   padding-bottom: 50px;
 }
 .category-tag {
-    color: white;
-    padding: 5px 10px;
-    border-radius: 5px;
-    font-weight: bold;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-weight: bold;
 }
 .greenbg {
-    background: var(--secon);
+  background: var(--secon);
 }
 .orangebg {
-    background: #FF4F0F;
+  background: #ff4f0f;
 }
 .purplebg {
-  background: #9E25F6;
+  background: #9e25f6;
 }
 .bluebg {
-  background: #21C6F7;
+  background: #21c6f7;
 }
 .redbg {
-  background: #B12929;
+  background: #b12929;
 }
 </style>

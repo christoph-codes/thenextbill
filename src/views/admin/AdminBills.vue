@@ -198,7 +198,7 @@ export default {
         .then(() => {
           // toggle paid status on local
           bill.paid_status = !bill.paid_status;
-          console.log(bill.name);
+          // ********* USE THIS CONSOLE LOG FOR TESTING *********console.log(bill.name);
           // console.log("Paid Status Updated");
           this.selectedBill = "";
         })

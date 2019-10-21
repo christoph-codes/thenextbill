@@ -113,9 +113,9 @@ p {
   padding: 0 30px;
 }
 form label {
-    font-weight: bold;
-    color: var(--gray);
-    font-size: 14px;
+  font-weight: bold;
+  color: var(--gray);
+  font-size: 14px;
 }
 input[type="text"],
 input[type="email"],
@@ -145,21 +145,21 @@ input[type="password"] {
   color: var(--lgray);
 } */
 select {
-    height: 40px;
-    background: white;
-    width: calc(100% + 10px);
+  height: 40px;
+  background: white;
+  width: calc(100% + 10px);
 }
 form input[type="submit"] {
-    text-align: center;
-    display: block;
-    margin: 0 auto 10px;
+  text-align: center;
+  display: block;
+  margin: 0 auto 10px;
 }
 form a.link {
-    text-align: center;
+  text-align: center;
 }
-input[type=date]::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    display: none;
+input[type="date"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  display: none;
 }
 section.hero {
   position: relative;

@@ -12,7 +12,7 @@
             <th>Due Date</th>
             <th>Category</th>
             <th>Importance</th>
-            <th>Recurrence</th>
+            <!-- <th>Recurrence</th> -->
             <th>Paid Status</th>
             <th></th>
           </tr>
@@ -63,7 +63,7 @@
                 />
               </div>
             </td>
-            <td>{{ bill.recurrence }}</td>
+            <!-- <td>{{ bill.recurrence }}</td> -->
             <td v-if="!bill.paid_status">
               <a
                 class="modal"
@@ -73,6 +73,10 @@
                   class="past-due-tag"
                   v-if="pastDueCheck(bill.due_day) && !bill.paid_status"
                   >Past Due</span
+                ><span
+                  class="due-today-tag"
+                  v-else-if="dueTodayCheck(bill.due_day) && !bill.paid_status"
+                  >Due Today</span
                 ><span v-else>Mark as Paid</span></a
               >
             </td>
@@ -232,6 +236,20 @@ export default {
       } else {
         return false;
       }
+    },
+    dueTodayCheck(dueday) {
+      let billsdate = dueday.toDate();
+      let currentDate = new Date();
+
+      // console.log(billsdate);
+      // console.log(currentDate);
+
+      if (
+        billsdate.getDate() == currentDate.getDate() &&
+        billsdate.getMonth() == currentDate.getMonth()
+      ) {
+        return true;
+      }
     }
   },
   created() {
@@ -290,6 +308,14 @@ span.past-due-tag {
   padding: 3px;
   background: #ffebf0;
   color: var(--danger);
+  font-weight: bold;
+}
+span.due-today-tag {
+  border: solid 1px var(--prime);
+  border-radius: 3px;
+  padding: 3px;
+  background: var(--secon);
+  color: var(--prime);
   font-weight: bold;
 }
 </style>

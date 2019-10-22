@@ -7,14 +7,19 @@
         class="uk-width-1-3@m uk-width-1-1@s bill"
       >
         <div class="bill-card">
-          <div v-if="pastDueCheck(bill.due_day)" class="past-due-flag">
-            <img src="@/assets/past-due-flag@2x.png" alt="Past Due Bill" />
+          <div v-if="pastDueCheck(bill.due_day)" class="bill-card-flag">
+            <img src="@/assets/past-due-flag@2x.png" alt="Bill Past Due" />
+          </div>
+          <div v-if="dueTodayCheck(bill.due_day)" class="bill-card-flag">
+            <img src="@/assets/due-today-flag@2x.png" alt="Bill Due Today" />
           </div>
           <div class="bill-message">
-            <p v-if="bill_message">{{ bill_message }}</p>
+            <p v-if="bill.name">
+              <b>{{ bill.name }}</b>
+            </p>
           </div>
           <div class="bill-content">
-            <h1 class="bill-name" v-if="bill.name">{{ bill.name }}</h1>
+            <!-- <h1 class="bill-name" v-if="bill.name">{{ bill.name }}</h1> -->
             <p class="bill-due-date" v-if="typeof bill.due_day === 'object'">
               <span class="bill-label">Due Date</span><br />
               {{ convertTimestamp(bill.due_day) }}
@@ -28,11 +33,11 @@
             </p>
             <hr />
             <div class="bill-details">
-              <div class="uk-grid">
+              <div class="uk-grid uk-grid-collapse">
                 <div class="uk-width-1-2">
                   <ul class="bill-details-label">
                     <li>Category:</li>
-                    <li>Recurrence:</li>
+                    <!-- <li>Recurrence:</li> -->
                     <li>Importance:</li>
                   </ul>
                 </div>
@@ -54,9 +59,9 @@
                         >
                       </div>
                     </li>
-                    <li>
+                    <!-- <li>
                       <div v-if="bill.recurrence">{{ bill.recurrence }}</div>
-                    </li>
+                    </li> -->
                     <li>
                       <div v-if="bill.importance == '3'">
                         <img
@@ -90,6 +95,14 @@
                 uk-toggle="target: #toggle-bill-modal"
                 @click="sendBill(bill)"
                 >Mark as Paid</a
+              >
+              <router-link
+                class="edit-bill-link"
+                :to="{
+                  name: 'admin-edit-bill',
+                  params: { bill_slug: bill.slug }
+                }"
+                >Edit Bill</router-link
               >
             </div>
             <div
@@ -241,6 +254,20 @@ export default {
       } else {
         return false;
       }
+    },
+    dueTodayCheck(dueday) {
+      let billsdate = dueday.toDate();
+      let currentDate = new Date();
+
+      // console.log(billsdate);
+      // console.log(currentDate);
+
+      if (
+        billsdate.getDate() == currentDate.getDate() &&
+        billsdate.getMonth() == currentDate.getMonth()
+      ) {
+        return true;
+      }
     }
   },
   created() {
@@ -266,7 +293,7 @@ export default {
   background: white;
   box-shadow: 0 0 30px -20px var(--gray);
   text-align: center;
-  min-height: 450px;
+  min-height: 420px;
 }
 .bill-content {
   padding: 30px;
@@ -294,10 +321,10 @@ p.bill-amount {
   background: var(--lgray);
 }
 .bill-message p {
-  color: var(--gray);
+  color: var(--prime);
   margin: 0px;
 }
-.past-due-flag {
+.bill-card-flag {
   float: right;
   margin-right: -24px;
   margin-top: 8px;
@@ -384,5 +411,9 @@ span.bill-details-label {
 }
 img.importance_icon {
   max-height: 23px;
+}
+a.edit-bill-link {
+  font-size: 12px;
+  color: var(--gray);
 }
 </style>

@@ -8,6 +8,7 @@
 import "../node_modules/uikit/dist/js/uikit-core.js";
 import "../node_modules/uikit/dist/js/uikit.js";
 import "../node_modules/uikit/dist/js/uikit-icons.min.js";
+import "../node_modules/uikit/dist/js/uikit-icons.js";
 
 export default {
   name: "app"
@@ -90,7 +91,7 @@ a * {
 }
 a,
 .uk-link {
-  color: var(--terti);
+  color: var(--prime);
 }
 a.link {
   display: block;

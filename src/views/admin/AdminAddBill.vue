@@ -39,7 +39,7 @@
           <option value="2">Medium</option>
           <option value="3">Low</option>
         </select>
-        <label>Bill Recurrence</label
+        <!-- <label>Bill Recurrence</label
         ><select required v-model="recurrence">
           <option value=" " disabled>Please Choose</option>
           <option value="weekly">Weekly</option>
@@ -48,7 +48,7 @@
           <option value="quarterly">Quarterly</option>
           <option value="annually">Annually</option>
           <option value="one-time">One-Time</option>
-        </select>
+        </select> -->
         <input
           type="submit"
           value="Add Bill"
@@ -67,8 +67,7 @@
             this.amount &&
             this.category &&
             this.importance &&
-            this.due_day &&
-            this.recurrence
+            this.due_day
         "
         uk-modal
       >
@@ -81,8 +80,10 @@
             @click="addAnotherBill"
             >Add Another Bill</a
           >
-          <a class="uk-modal-close btn secon" href="">Cancel</a>
-          <a class="uk-modal-close-default" href="" uk-close></a>
+          <router-link to="/admin/dashboard" class="btn secon uk-modal-close"
+            >Dashboard</router-link
+          >
+          <!-- <a class="uk-modal-close-default" href="" uk-close></a> -->
         </div>
       </div>
 
@@ -107,7 +108,7 @@ export default {
       due_day: null,
       name: null,
       importance: null,
-      recurrence: null,
+      // recurrence: null,
       user_id: null,
       slug: null,
       feedback: null,
@@ -124,8 +125,8 @@ export default {
         this.amount &&
         this.category &&
         this.importance &&
-        this.due_day &&
-        this.recurrence
+        this.due_day
+        // this.recurrence
       ) {
         this.feedback = null;
         // create a slug
@@ -143,7 +144,7 @@ export default {
             due_day: this.fbDate,
             name: this.name,
             importance: this.importance,
-            recurrence: this.recurrence,
+            // recurrence: this.recurrence,
             user_id: this.admin.user_id,
             creationdate: this.fbCreationDate,
             paid_status: false,
@@ -151,12 +152,12 @@ export default {
           })
           .then(() => {
             // this.$router.push({ name: "admin-dashboard" });
-            this.name = "";
-            this.due_day = "";
-            this.category = "";
-            this.amount = "";
-            this.creationdate = "";
-            this.recurrence = "";
+            // this.name = "";
+            // this.due_day = "";
+            // this.category = "";
+            // this.amount = "";
+            // this.creationdate = "";
+            // this.recurrence = "";
             // this.bills.$forceUpdate();
           });
       } else {
@@ -169,7 +170,7 @@ export default {
       this.category = "";
       this.amount = "";
       this.creationdate = "";
-      this.recurrence = "";
+      // this.recurrence = "";
       this.importance = "";
     },
     getUserAndBills() {

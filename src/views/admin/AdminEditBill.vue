@@ -33,7 +33,7 @@
           <option value="3">Low</option>
         </select>
 
-        <label>Bill Recurrence</label>
+        <!-- <label>Bill Recurrence</label>
         <select required v-model="bill.recurrence">
           <option value="" disabled selected>Bill Recurrence</option>
           <option value="weekly">Weekly</option>
@@ -42,7 +42,7 @@
           <option value="quarterly">Quarterly</option>
           <option value="annually">Annually</option>
           <option value="one-time">One-Time</option>
-        </select>
+        </select> -->
 
         <label>Has this bill been paid?</label>
         <select required v-model="bill.paid_status">
@@ -51,7 +51,10 @@
           <option :value="false">No</option>
         </select>
         <input type="submit" value="Update Bill" class="btn prime" />
-        <a uk-toggle="target: #delete-bill" class="link"
+        <a
+          uk-toggle="target: #delete-bill"
+          @click="sendBill(bill)"
+          class="link modal"
           ><i class="uk-icon-close"></i>Delete Bill</a
         >
         <div id="delete-bill" uk-modal class="uk-modal-full">
@@ -64,7 +67,10 @@
                 By clicking "Delete Bill" you fully understand that you will
                 lose all historical data tied to this bill.
               </p>
-              <a class="btn danger" href="" @click="deleteBill(bill.id)">
+              <a
+                class="btn danger uk-modal-close"
+                @click="deleteBill(selectedBill.id)"
+              >
                 Delete Bill</a
               >
               <a class="btn terti uk-modal-close" href="">Cancel</a>
@@ -93,7 +99,8 @@ export default {
     return {
       bill: {},
       feedback: null,
-      newDate: null
+      newDate: null,
+      selectedBill: ""
     };
   },
   created() {
@@ -109,7 +116,7 @@ export default {
         .where("slug", "==", this.$route.params.bill_slug);
       // check to see if user has rights to edit this bill
       if (admin) {
-        bill.get().then(snapshot => {
+        bill.onSnapshot(snapshot => {
           snapshot.forEach(doc => {
             // console.log(doc.data());
             this.bill = doc.data();
@@ -142,7 +149,7 @@ export default {
             due_day: this.fbDate,
             name: this.bill.name,
             importance: this.bill.importance,
-            recurrence: this.bill.recurrence,
+            // recurrence: this.bill.recurrence,
             paid_status: this.bill.paid_status,
             slug: this.bill.slug
           })
@@ -164,8 +171,17 @@ export default {
         .doc(id)
         .delete()
         .then(() => {
-          this.$router.push({ name: "admin-dashboard" });
+          // console.log(this.selectedBill.name);
+          this.selectedBill = "";
+          this.$router.push({ name: "admin-bills" });
         });
+      // .catch(err => {
+      //     console.error("Error removing document: ", err);
+      // });
+    },
+    sendBill(bill) {
+      this.selectedBill = bill;
+      // console.log(bill);
     }
   },
   computed: {

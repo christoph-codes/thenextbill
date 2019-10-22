@@ -49,11 +49,44 @@
           <option value="annually">Annually</option>
           <option value="one-time">One-Time</option>
         </select>
-        <input type="submit" value="Add Bill" class="btn prime" />
+        <input
+          type="submit"
+          value="Add Bill"
+          class="btn prime modal"
+          uk-toggle="target: #toggle-another-bill-modal"
+        />
+
         <router-link to="/admin/dashboard" class="link">Cancel</router-link>
       </form>
 
-      <p class="text-danger" v-if="feedback">{{ feedback }}</p>
+      <div
+        id="toggle-another-bill-modal"
+        class="add-bill-modal uk-flex-top"
+        v-if="
+          this.name &&
+            this.amount &&
+            this.category &&
+            this.importance &&
+            this.due_day &&
+            this.recurrence
+        "
+        uk-modal
+      >
+        <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+          <h2 class="uk-modal-title">
+            Bill Successfully Added! Would you like to add another bill?
+          </h2>
+          <a
+            class="btn prime add-another uk-modal-close"
+            @click="addAnotherBill"
+            >Add Another Bill</a
+          >
+          <a class="uk-modal-close btn secon" href="">Cancel</a>
+          <a class="uk-modal-close-default" href="" uk-close></a>
+        </div>
+      </div>
+
+      <p class="text-terti uk-text-center" v-if="feedback">{{ feedback }}</p>
     </div>
   </div>
 </template>
@@ -117,8 +150,7 @@ export default {
             slug: this.slug
           })
           .then(() => {
-            this.$router.push({ name: "admin-dashboard" });
-            this.feedback = "Bill Successfully Added";
+            // this.$router.push({ name: "admin-dashboard" });
             this.name = "";
             this.due_day = "";
             this.category = "";
@@ -130,6 +162,15 @@ export default {
       } else {
         this.feedback = "You must complete all fields!";
       }
+    },
+    addAnotherBill() {
+      this.name = "";
+      this.due_day = "";
+      this.category = "";
+      this.amount = "";
+      this.creationdate = "";
+      this.recurrence = "";
+      this.importance = "";
     },
     getUserAndBills() {
       // get current user
@@ -146,10 +187,7 @@ export default {
         // get current user's bills
         let bills = db
           .collection("bills")
-          .where("user_id", "==", this.admin.user_id)
-          .orderBy("due_day")
-          .orderBy("amount")
-          .orderBy("importance");
+          .where("user_id", "==", this.admin.user_id);
         bills.onSnapshot(snapshot => {
           snapshot.docChanges().forEach(change => {
             let bill = change.doc.data();

@@ -46,7 +46,8 @@
                             bluebg: bill.category === 'food',
                             purplebg: bill.category === 'transportation',
                             greenbg: bill.category === 'utilities',
-                            redbg: bill.category === 'housing'
+                            redbg: bill.category === 'housing',
+                            yellowbg: bill.category === 'misc'
                           }"
                           class="category-tag"
                           >{{ bill.category }}</span

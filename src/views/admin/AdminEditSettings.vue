@@ -45,7 +45,8 @@ export default {
   name: "admin-edit-settings",
   data() {
     return {
-      admin: {}
+      admin: {},
+      feedback: null
     };
   },
   methods: {

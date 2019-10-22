@@ -1,6 +1,10 @@
 <template>
   <div class="admin-dashboard">
-    <div class="uk-grid dashboard-bills">
+    <!-- <div v-if="firstTime" class="bounce animated first-bill">
+      <h2>Welcome, Be sure to <br />add your first bill!</h2>
+      <img src="@/assets/add-first-bill@2x.png" alt="Add your first bill" />
+    </div> -->
+    <div v-if="!firstTime" class="uk-grid dashboard-bills">
       <div
         v-for="bill in unpaidBills"
         :key="bill.id"
@@ -170,8 +174,12 @@ export default {
       bills: [],
       feedback: null,
       bill_message: "Pay this today!",
-      selectedBill: ""
+      selectedBill: "",
+      firstTime: false
     };
+  },
+  created() {
+    this.getUserAndBills();
   },
   methods: {
     getUserAndBills() {
@@ -269,9 +277,6 @@ export default {
         return true;
       }
     }
-  },
-  created() {
-    this.getUserAndBills();
   },
   computed: {
     unpaidBills() {
@@ -415,5 +420,58 @@ img.importance_icon {
 a.edit-bill-link {
   font-size: 12px;
   color: var(--gray);
+}
+.first-bill {
+  max-width: 400px;
+  text-align: right;
+  margin-top: 230px;
+}
+.first-bill h2 {
+  font-weight: bold;
+  color: var(--prime);
+  font-size: 24px;
+}
+.animated {
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+@-webkit-keyframes bounce {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    -webkit-transform: translateY(0);
+  }
+  40% {
+    -webkit-transform: translateY(-30px);
+  }
+  60% {
+    -webkit-transform: translateY(-15px);
+  }
+}
+
+@keyframes bounce {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-30px);
+  }
+  60% {
+    transform: translateY(-15px);
+  }
+}
+
+.bounce {
+  -webkit-animation-name: bounce;
+  animation-name: bounce;
 }
 </style>

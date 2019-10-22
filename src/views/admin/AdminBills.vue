@@ -1,140 +1,147 @@
 <template>
   <div class="admin-bills">
-    <h1 class="dashboard-header">Bills</h1>
-    <div class="bills-table">
-      <table
-        class="uk-table uk-table-hover uk-table-responsive uk-table-divider"
-      >
-        <thead>
-          <tr>
-            <th>Bill Name</th>
-            <th>Amount</th>
-            <th>Due Date</th>
-            <th>Category</th>
-            <th>Importance</th>
-            <!-- <th>Recurrence</th> -->
-            <th>Paid Status</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="bill in bills" :key="bill.id">
-            <td class="bold-table-data">{{ bill.name }}</td>
-            <td>${{ bill.amount }}</td>
-            <td>
-              <div v-if="typeof bill.due_day === 'object'">
-                {{ convertTimestamp(bill.due_day) }}
-              </div>
-            </td>
-            <td>
-              <span
-                :class="{
-                  orangebg: bill.category === 'entertainment',
-                  bluebg: bill.category === 'food',
-                  purplebg: bill.category === 'transportation',
-                  greenbg: bill.category === 'utilities',
-                  redbg: bill.category === 'housing',
-                  yellowbg: bill.category === 'misc'
-                }"
-                class="category-tag"
-                >{{ bill.category }}</span
-              >
-            </td>
-            <td>
-              <div v-if="bill.importance == '3'">
-                <img
-                  src="@/assets/low-importance-icon@2x.png"
-                  :alt="bill.name"
-                  class="importance_icon"
-                />
-              </div>
-              <div v-if="bill.importance == '2'">
-                <img
-                  src="@/assets/medium-importance-icon@2x.png"
-                  :alt="bill.name"
-                  class="importance_icon"
-                />
-              </div>
-              <div v-if="bill.importance == '1'">
-                <img
-                  src="@/assets/high-importance-icon@2x.png"
-                  :alt="bill.name"
-                  class="importance_icon"
-                />
-              </div>
-            </td>
-            <!-- <td>{{ bill.recurrence }}</td> -->
-            <td v-if="!bill.paid_status">
-              <a
-                class="modal"
-                uk-toggle="target: #toggle-bill-modal"
-                @click="sendBill(bill)"
-                ><span
-                  class="past-due-tag"
-                  v-if="pastDueCheck(bill.due_day) && !bill.paid_status"
-                  >Past Due</span
-                ><span
-                  class="due-today-tag"
-                  v-else-if="dueTodayCheck(bill.due_day) && !bill.paid_status"
-                  >Due Today</span
-                ><span v-else>Mark as Paid</span></a
-              >
-            </td>
-            <td v-else>
-              <b>Paid</b>
-            </td>
-            <td>
-              <router-link
-                :to="{
-                  name: 'admin-edit-bill',
-                  params: { bill_slug: bill.slug }
-                }"
-                >Edit Bill</router-link
-              >
-            </td>
-            <div
-              id="toggle-bill-modal"
-              class="add-bill-modal uk-flex-top"
-              uk-modal
-            >
+    <!-- <div v-if="bills.length == 0" class="bounce animated first-bill">
+      <h2>Welcome, Be sure to <br />add your first bill!</h2>
+      <img src="@/assets/add-first-bill@2x.png" alt="Add your first bill" />
+    </div> -->
+    <div class="bill-list-view">
+      <h1 class="dashboard-header">Bills</h1>
+      <div class="bills-table">
+        <table
+          class="uk-table uk-table-hover uk-table-responsive uk-table-divider"
+        >
+          <thead>
+            <tr>
+              <th>Bill Name</th>
+              <th>Amount</th>
+              <th>Due Date</th>
+              <th>Category</th>
+              <th>Importance</th>
+              <!-- <th>Recurrence</th> -->
+              <th>Paid Status</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="bill in bills" :key="bill.id">
+              <td class="bold-table-data">{{ bill.name }}</td>
+              <td>${{ bill.amount }}</td>
+              <td>
+                <div v-if="typeof bill.due_day === 'object'">
+                  {{ convertTimestamp(bill.due_day) }}
+                </div>
+              </td>
+              <td>
+                <span
+                  :class="{
+                    orangebg: bill.category === 'entertainment',
+                    bluebg: bill.category === 'food',
+                    purplebg: bill.category === 'transportation',
+                    greenbg: bill.category === 'utilities',
+                    redbg: bill.category === 'housing',
+                    yellowbg: bill.category === 'misc'
+                  }"
+                  class="category-tag"
+                  >{{ bill.category }}</span
+                >
+              </td>
+              <td>
+                <div v-if="bill.importance == '3'">
+                  <img
+                    src="@/assets/low-importance-icon@2x.png"
+                    :alt="bill.name"
+                    class="importance_icon"
+                  />
+                </div>
+                <div v-if="bill.importance == '2'">
+                  <img
+                    src="@/assets/medium-importance-icon@2x.png"
+                    :alt="bill.name"
+                    class="importance_icon"
+                  />
+                </div>
+                <div v-if="bill.importance == '1'">
+                  <img
+                    src="@/assets/high-importance-icon@2x.png"
+                    :alt="bill.name"
+                    class="importance_icon"
+                  />
+                </div>
+              </td>
+              <!-- <td>{{ bill.recurrence }}</td> -->
+              <td v-if="!bill.paid_status">
+                <a
+                  class="modal"
+                  uk-toggle="target: #toggle-bill-modal"
+                  @click="sendBill(bill)"
+                  ><span
+                    class="past-due-tag"
+                    v-if="pastDueCheck(bill.due_day) && !bill.paid_status"
+                    >Past Due</span
+                  ><span
+                    class="due-today-tag"
+                    v-else-if="dueTodayCheck(bill.due_day) && !bill.paid_status"
+                    >Due Today</span
+                  ><span v-else>Mark as Paid</span></a
+                >
+              </td>
+              <td v-else>
+                <b>Paid</b>
+              </td>
+              <td>
+                <router-link
+                  :to="{
+                    name: 'admin-edit-bill',
+                    params: { bill_slug: bill.slug }
+                  }"
+                  >Edit Bill</router-link
+                >
+              </td>
               <div
-                class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical"
+                id="toggle-bill-modal"
+                class="add-bill-modal uk-flex-top"
+                uk-modal
               >
-                <h2 v-if="selectedBill.paid_status" class="uk-modal-title">
-                  Are you sure you want to mark {{ selectedBill.name }} as
-                  unpaid?
-                </h2>
-                <h2 v-if="!selectedBill.paid_status" class="uk-modal-title">
-                  Are you sure you want to mark {{ selectedBill.name }} as Paid?
-                </h2>
-                <a
-                  class="uk-modal-close btn prime"
-                  @click="toggle(selectedBill)"
-                  href=""
-                  >Confirm</a
+                <div
+                  class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical"
                 >
-                <a
-                  class="uk-modal-close btn secon"
-                  @click="selectedBill = ''"
-                  href=""
-                  >Cancel</a
-                >
-                <a
-                  class="uk-modal-close-default"
-                  @click="selectedBill = ''"
-                  href=""
-                  uk-close
-                ></a>
+                  <h2 v-if="selectedBill.paid_status" class="uk-modal-title">
+                    Are you sure you want to mark {{ selectedBill.name }} as
+                    unpaid?
+                  </h2>
+                  <h2 v-if="!selectedBill.paid_status" class="uk-modal-title">
+                    Are you sure you want to mark {{ selectedBill.name }} as
+                    Paid?
+                  </h2>
+                  <a
+                    class="uk-modal-close btn prime"
+                    @click="toggle(selectedBill)"
+                    href=""
+                    >Confirm</a
+                  >
+                  <a
+                    class="uk-modal-close btn secon"
+                    @click="selectedBill = ''"
+                    href=""
+                    >Cancel</a
+                  >
+                  <a
+                    class="uk-modal-close-default"
+                    @click="selectedBill = ''"
+                    href=""
+                    uk-close
+                  ></a>
+                </div>
               </div>
-            </div>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="add-to-bills">
-      <h3>
-        <router-link to="/admin/add-bill"> [+] Add Bill </router-link>
-      </h3>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="add-to-bills">
+        <h3>
+          <router-link to="/admin/add-bill"> [+] Add Bill </router-link>
+        </h3>
+      </div>
     </div>
   </div>
 </template>

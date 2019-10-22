@@ -153,10 +153,14 @@ select {
   background: white;
   width: calc(100% + 10px);
 }
-form input[type="submit"] {
+form input[type="submit"],
+.add-another {
   text-align: center;
   display: block;
   margin: 0 auto 10px;
+}
+.add-another {
+  max-width: 250px;
 }
 form a.link {
   text-align: center;
@@ -192,6 +196,9 @@ h1.page-header,
 }
 .text-danger {
   color: var(--danger);
+}
+.text-terti {
+  color: var(--terti);
 }
 .uk-modal-dialog p {
   color: var(--gray);

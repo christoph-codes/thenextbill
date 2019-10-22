@@ -65,4 +65,7 @@ div#adminHome {
 .redbg {
   background: #b12929;
 }
+.yellowbg {
+  background: #ffdf49;
+}
 </style>

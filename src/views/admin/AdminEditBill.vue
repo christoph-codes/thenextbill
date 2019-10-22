@@ -164,14 +164,16 @@ export default {
         .doc(id)
         .delete()
         .then(() => {
-          this.$router.push({ name: "admin-bills" });
+          this.$router.push({ name: "admin-dashboard" });
         });
     }
   },
   computed: {
     // Convert Date String to Firebase Timestamp
     fbDate() {
-      const date = new Date(this.newDate);
+      let date = new Date(this.newDate);
+      // console.log(date);
+      date.setHours(date.getHours() + 12);
       // console.log(date);
       return date;
     },

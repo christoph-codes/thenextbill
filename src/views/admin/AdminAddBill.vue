@@ -81,7 +81,7 @@
             >Add Another Bill</a
           >
           <router-link to="/admin/dashboard" class="btn secon uk-modal-close"
-            >Dashboard</router-link
+            >Go To Dashboard</router-link
           >
           <!-- <a class="uk-modal-close-default" href="" uk-close></a> -->
         </div>
@@ -151,27 +151,22 @@ export default {
             slug: this.slug
           })
           .then(() => {
-            // this.$router.push({ name: "admin-dashboard" });
-            // this.name = "";
-            // this.due_day = "";
-            // this.category = "";
-            // this.amount = "";
-            // this.creationdate = "";
+            this.feedback = "Bill Successfully Added!"
+            this.name = "";
+            this.due_day = "";
+            this.category = "";
+            this.amount = "";
+            this.importance = "";
+            this.$router.push({ name: "admin-dashboard" });
             // this.recurrence = "";
-            // this.bills.$forceUpdate();
           });
       } else {
         this.feedback = "You must complete all fields!";
       }
     },
     addAnotherBill() {
-      this.name = "";
-      this.due_day = "";
-      this.category = "";
-      this.amount = "";
-      this.creationdate = "";
-      // this.recurrence = "";
-      this.importance = "";
+      console.log("Got it.");
+      this.$router.push({ name: "admin-add-bill" });
     },
     getUserAndBills() {
       // get current user

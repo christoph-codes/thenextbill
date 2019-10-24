@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "the-next-bill"
+    "default": "the-next-bill",
+    "production": "the-next-bill"
   }
 }

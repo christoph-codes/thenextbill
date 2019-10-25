@@ -51,7 +51,7 @@
         </select> -->
         <input
           type="submit"
-          value="Add Bill"
+          value="Save"
           class="btn prime modal"
           uk-toggle="target: #toggle-another-bill-modal"
         />
@@ -165,7 +165,7 @@ export default {
       }
     },
     addAnotherBill() {
-      console.log("Got it.");
+      // console.log("Got it.");
       this.$router.push({ name: "admin-add-bill" });
     },
     getUserAndBills() {

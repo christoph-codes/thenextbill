@@ -29,9 +29,9 @@
         </tr>
       </table>
     </div>
-    <div class="add-to-bills">
+    <div class="uk-text-center">
       <h3>
-        <router-link to="/admin/edit-settings"> Edit Settings </router-link>
+        <router-link class="btn prime" to="/admin/edit-settings"> Edit Settings </router-link>
       </h3>
     </div>
   </div>

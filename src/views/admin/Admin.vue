@@ -13,18 +13,21 @@
         </div>
       </div>
     </div>
+    <MainFooter />
   </div>
 </template>
 
 <script>
 import AdminNav from "@/components/admin/AdminNav";
 import AdminSideNav from "@/components/admin/AdminSideNav";
+import MainFooter from "@/components/web/MainFooter.vue";
 
 export default {
   name: "admin",
   components: {
     AdminNav,
-    AdminSideNav
+    AdminSideNav,
+    MainFooter
   },
   data() {
     return {};
@@ -33,7 +36,7 @@ export default {
 </script>
 
 <style>
-div#adminHome {
+#adminHome {
   background: var(--wgray);
   min-height: 100vh;
 }
@@ -44,12 +47,6 @@ div#adminHome {
 .dashboard {
   padding-bottom: 50px;
 }
-.category-tag {
-  color: white;
-  padding: 5px 10px;
-  border-radius: 5px;
-  font-weight: bold;
-}
 .greenbg {
   background: var(--secon);
 }
@@ -57,7 +54,7 @@ div#adminHome {
   background: #ff4f0f;
 }
 .purplebg {
-  background: #9e25f6;
+  background: #4D06AA;
 }
 .bluebg {
   background: #21c6f7;
@@ -67,5 +64,11 @@ div#adminHome {
 }
 .yellowbg {
   background: #ffdf49;
+}
+.tealbg {
+  background: #1DDDD8;
+}
+.magentabg {
+  background: #D3188E;
 }
 </style>

@@ -154,7 +154,7 @@ export default {
             slug: this.bill.slug
           })
           .then(() => {
-            this.$router.push({ name: "admin-bills" });
+            this.$router.push({ name: "admin-dashboard" });
             this.feedback = "Bill Successfully Updated";
           })
           .catch(err => {
@@ -173,7 +173,7 @@ export default {
         .then(() => {
           // console.log(this.selectedBill.name);
           this.selectedBill = "";
-          this.$router.push({ name: "admin-bills" });
+          this.$router.push({ name: "admin-dashboard" });
         });
       // .catch(err => {
       //     console.error("Error removing document: ", err);

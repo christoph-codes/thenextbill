@@ -9,7 +9,6 @@
       <hr />
       <ul>
         <li><router-link to="/admin/dashboard">Dashboard</router-link></li>
-        <li><router-link to="/admin/bills">List View</router-link></li>
         <li><router-link to="/admin/add-bill">Add Bill</router-link></li>
         <li><router-link to="/admin/settings">Settings</router-link></li>
       </ul>
@@ -23,7 +22,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .admin-side-nav {
   background: var(--lgray);
   text-align: center;

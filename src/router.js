@@ -10,6 +10,7 @@ import PageNotFound from "./views/web/NotFound.vue";
 import Admin from "./views/admin/Admin.vue";
 // Admin Templatees
 import AdminDashboard from "./views/admin/AdminDashboard.vue";
+// import AdminDashboardTwo from "./views/admin/AdminDashboard2.vue";
 import AdminAddBill from "./views/admin/AdminAddBill.vue";
 import AdminEditBill from "./views/admin/AdminEditBill.vue";
 import AdminBills from "./views/admin/AdminBills.vue";
@@ -58,6 +59,11 @@ const router = new Router({
           name: "admin-dashboard",
           component: AdminDashboard
         },
+        // {
+        //   path: "dashboard2",
+        //   name: "admin-dashboard-two",
+        //   component: AdminDashboardTwo
+        // },
         {
           path: "add-bill",
           name: "admin-add-bill",

@@ -1,10 +1,10 @@
 <template>
   <div class="admin-dashboard-two">
     <div class="uk-grid">
-      <div class="uk-width-medium-1-3 uk-width-small-1-2">
+      <div class="uk-width-1-3@m">
         <AdminBillsCard/>
       </div>
-      <div class="uk-width-medium-2-3 uk-width-small-1-2">
+      <div class="uk-width-2-3@m">
         <AdminBillsList />
       </div>
     </div>

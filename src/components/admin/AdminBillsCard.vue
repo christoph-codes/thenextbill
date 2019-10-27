@@ -407,5 +407,10 @@ a.edit-bill-link {
   font-size: 12px;
   color: var(--gray);
 }
+@media(max-width: 960px) {
+  a.edit-bill-link[data-v-08ea8f46] {
+    display: block;
+  }
+}
 
 </style>

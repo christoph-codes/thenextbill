@@ -1,10 +1,10 @@
 <template>
   <div id="adminHome">
     <div class="uk-grid uk-grid-small">
-      <div class="uk-width-1-6">
+      <div class="uk-width-1-6@m">
         <AdminSideNav />
       </div>
-      <div class="uk-width-5-6">
+      <div class="uk-width-5-6@m">
         <div class="dashboard-view">
           <AdminNav />
           <div class="dashboard">

@@ -1,7 +1,7 @@
 <template>
   <div class="admin-settings">
     <h1 class="dashboard-header">Settings</h1>
-    <div class="bills-table">
+    <div class="settings-table">
       <table
         class="uk-table uk-table-hover uk-table-responsive uk-table-divider"
       >
@@ -92,6 +92,10 @@ export default {
 
 <style scoped>
 td.setting-label {
-  text-align: right;
+  text-align: center;
+}
+.settings-table tr {
+    margin: 0;
+    text-align: center;
 }
 </style>

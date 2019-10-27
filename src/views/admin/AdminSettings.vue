@@ -1,7 +1,7 @@
 <template>
   <div class="admin-settings">
     <h1 class="dashboard-header">Settings</h1>
-    <div class="bills-table">
+    <div class="settings-table">
       <table
         class="uk-table uk-table-hover uk-table-responsive uk-table-divider"
       >
@@ -29,9 +29,9 @@
         </tr>
       </table>
     </div>
-    <div class="add-to-bills">
+    <div class="uk-text-center">
       <h3>
-        <router-link to="/admin/edit-settings"> Edit Settings </router-link>
+        <router-link class="btn prime" to="/admin/edit-settings"> Edit Settings </router-link>
       </h3>
     </div>
   </div>
@@ -92,6 +92,10 @@ export default {
 
 <style scoped>
 td.setting-label {
-  text-align: right;
+  text-align: center;
+}
+.settings-table tr {
+    margin: 0;
+    text-align: center;
 }
 </style>

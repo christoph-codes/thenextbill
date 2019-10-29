@@ -3,7 +3,6 @@
     <p class="line-header"><span>Your Next Bill</span></p>
     <div v-for="bill in firstBill" :key="bill.id" class="bill next-bill">
       <div class="bill-card">
-        
         <div v-if="dueTodayCheck(bill.due_day)" class="bill-card-flag">
           <img src="@/assets/due-today-flag@2x.png" alt="Bill Due Today" />
         </div>
@@ -407,10 +406,9 @@ a.edit-bill-link {
   font-size: 12px;
   color: var(--gray);
 }
-@media(max-width: 960px) {
+@media (max-width: 960px) {
   a.edit-bill-link[data-v-08ea8f46] {
     display: block;
   }
 }
-
 </style>

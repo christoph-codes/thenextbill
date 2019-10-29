@@ -54,7 +54,7 @@ export default {
   background: #ff4f0f;
 }
 .purplebg {
-  background: #4D06AA;
+  background: #4d06aa;
 }
 .bluebg {
   background: #21c6f7;
@@ -66,9 +66,9 @@ export default {
   background: #ffdf49;
 }
 .tealbg {
-  background: #1DDDD8;
+  background: #1dddd8;
 }
 .magentabg {
-  background: #D3188E;
+  background: #d3188e;
 }
 </style>

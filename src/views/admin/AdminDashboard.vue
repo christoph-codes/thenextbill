@@ -2,7 +2,7 @@
   <div class="admin-dashboard-two">
     <div class="uk-grid">
       <div class="uk-width-1-3@m">
-        <AdminBillsCard/>
+        <AdminBillsCard />
       </div>
       <div class="uk-width-2-3@m">
         <AdminBillsList />
@@ -12,9 +12,6 @@
 </template>
 
 <script>
-import firebase from "firebase";
-import db from "@/firebase/init";
-
 import AdminBillsList from "@/components/admin/AdminBillsList";
 import AdminBillsCard from "@/components/admin/AdminBillsCard";
 
@@ -27,6 +24,4 @@ export default {
 };
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

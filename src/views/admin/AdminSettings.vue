@@ -31,7 +31,9 @@
     </div>
     <div class="uk-text-center">
       <h3>
-        <router-link class="btn prime" to="/admin/edit-settings"> Edit Settings </router-link>
+        <router-link class="btn prime" to="/admin/edit-settings">
+          Edit Settings
+        </router-link>
       </h3>
     </div>
   </div>
@@ -95,7 +97,7 @@ td.setting-label {
   text-align: center;
 }
 .settings-table tr {
-    margin: 0;
-    text-align: center;
+  margin: 0;
+  text-align: center;
 }
 </style>

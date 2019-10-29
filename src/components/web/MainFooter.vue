@@ -2,8 +2,7 @@
   <div class="main-footer">
     <div class="main">
       <small class="small-text">
-        Copyright © 2019. The Next Bill, a TKC Pro Company. All Rights
-        Reserved.
+        Copyright © 2019. The Next Bill, a TKC Pro Company. All Rights Reserved.
       </small>
     </div>
   </div>

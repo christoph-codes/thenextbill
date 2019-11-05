@@ -65,3 +65,19 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+section.hero .content {
+  width: 90%;
+}
+input[type="text"],
+input[type="email"],
+input[type="number"],
+select,
+input[type="radio"],
+input[type="date"],
+input[type="password"] {
+  padding: 5px 0;
+  text-align: center;
+}
+</style>

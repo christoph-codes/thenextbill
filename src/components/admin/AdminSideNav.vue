@@ -20,17 +20,36 @@
 
       <div class="uk-hidden@m hamburger">
         <a href="#mobile-nav" uk-toggle>
-          <img src="@/assets/hamburger-icon.svg" alt="Hamburger Menu Icon - The Next Bill" />
-          </a>
+          <img
+            src="@/assets/hamburger-icon.svg"
+            alt="Hamburger Menu Icon - The Next Bill"
+          />
+        </a>
       </div>
       <div id="mobile-nav" uk-offcanvas="flip: true; mode: push">
         <div class="uk-offcanvas-bar">
-            <button class="uk-offcanvas-close" type="button" uk-close></button>
-            <ul>
-              <li><router-link class="uk-offcanvas-close" to="/admin/dashboard">Dashboard</router-link></li>
-              <li><router-link class="uk-offcanvas-close" to="/admin/add-bill">Add Bill</router-link></li>
-              <li><router-link class="uk-offcanvas-close" to="/admin/settings">Settings</router-link></li>
-            </ul>
+          <button class="uk-offcanvas-close" type="button" uk-close></button>
+          <ul>
+            <li>
+              <b>{{ admin.fname }}</b>
+            </li>
+            <li>
+              <router-link class="uk-offcanvas-close" to="/admin/dashboard"
+                >Dashboard</router-link
+              >
+            </li>
+            <li>
+              <router-link class="uk-offcanvas-close" to="/admin/add-bill"
+                >Add Bill</router-link
+              >
+            </li>
+            <li>
+              <router-link class="uk-offcanvas-close" to="/admin/settings"
+                >Settings</router-link
+              >
+            </li>
+            <li><a @click="logout">Logout</a></li>
+          </ul>
         </div>
       </div>
     </div>
@@ -38,8 +57,39 @@
 </template>
 
 <script>
+import firebase from "firebase";
+import db from "@/firebase/init";
+
 export default {
-  name: "admin-side-nav"
+  name: "admin-side-nav",
+  data() {
+    return {
+      admin: {}
+    };
+  },
+  methods: {
+    logout() {
+      firebase
+        .auth()
+        .signOut()
+        .then(() => {
+          this.$router.push({ name: "login" });
+        });
+    }
+  },
+  created() {
+    // get current user
+    let admin = firebase.auth().currentUser;
+
+    // find the logged in user record and grab its data
+    let user = db.collection("users").where("user_id", "==", admin.uid);
+
+    user.onSnapshot(snapshot => {
+      snapshot.forEach(doc => {
+        (this.admin = doc.data()), (this.admin.id = doc.id);
+      });
+    });
+  }
 };
 </script>
 
@@ -101,11 +151,21 @@ img.dashboard-logo {
   }
 }
 @media (max-width: 600px) {
-  .admin-side-nav li {
-    padding: 10px 0 10px 20px;
+  #mobile-nav li {
+    padding: 30px 0;
+  }
+  #mobile-nav li * {
+    font-size: 24px;
+  }
+  .uk-offcanvas-bar {
+    background: var(--prime);
   }
   .uk-offcanvas-close {
     position: inherit;
+  }
+  .admin-side-nav {
+    min-height: 60px;
+    height: 60px;
   }
   .admin-side-nav-content {
     padding: 10px 20px;
@@ -126,6 +186,7 @@ img.dashboard-logo {
   img.mobile-dashboard-logo {
     float: left;
     width: 70%;
+    max-width: 200px;
   }
   .hamburger a img {
     width: 30px;

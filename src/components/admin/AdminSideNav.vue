@@ -2,16 +2,37 @@
   <div class="admin-side-nav">
     <div class="admin-side-nav-content uk-sticky" uk-sticky>
       <img
-        class="dashboard-logo"
+        class="dashboard-logo uk-visible@s"
         alt="The Next Bill Dashboard"
         src="@/assets/side-nav-logo-gray@2x.png"
       />
+      <img
+        class="mobile-dashboard-logo uk-hidden@m"
+        alt="The Next Bill Dashboard"
+        src="@/assets/dashboard-logo.svg"
+      />
       <hr />
-      <ul>
+      <ul class="uk-visible@m">
         <li><router-link to="/admin/dashboard">Dashboard</router-link></li>
         <li><router-link to="/admin/add-bill">Add Bill</router-link></li>
         <li><router-link to="/admin/settings">Settings</router-link></li>
       </ul>
+
+      <div class="uk-hidden@m hamburger">
+        <a href="#mobile-nav" uk-toggle>
+          <img src="@/assets/hamburger-icon.svg" alt="Hamburger Menu Icon - The Next Bill" />
+          </a>
+      </div>
+      <div id="mobile-nav" uk-offcanvas="flip: true; mode: push">
+        <div class="uk-offcanvas-bar">
+            <button class="uk-offcanvas-close" type="button" uk-close></button>
+            <ul>
+              <li><router-link class="uk-offcanvas-close" to="/admin/dashboard">Dashboard</router-link></li>
+              <li><router-link class="uk-offcanvas-close" to="/admin/add-bill">Add Bill</router-link></li>
+              <li><router-link class="uk-offcanvas-close" to="/admin/settings">Settings</router-link></li>
+            </ul>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -80,8 +101,34 @@ img.dashboard-logo {
   }
 }
 @media (max-width: 600px) {
-  .admin-side-nav li[data-v-16ad086d] {
+  .admin-side-nav li {
     padding: 10px 0 10px 20px;
+  }
+  .uk-offcanvas-close {
+    position: inherit;
+  }
+  .admin-side-nav-content {
+    padding: 10px 20px;
+    height: 60px;
+  }
+  .dashboard-view {
+    padding: 0 20px 0;
+  }
+  .hamburger {
+    float: right;
+    width: 30%;
+    text-align: right;
+  }
+  .hamburger a {
+    padding: 5px 0;
+    display: inline-block;
+  }
+  img.mobile-dashboard-logo {
+    float: left;
+    width: 70%;
+  }
+  .hamburger a img {
+    width: 30px;
   }
 }
 </style>

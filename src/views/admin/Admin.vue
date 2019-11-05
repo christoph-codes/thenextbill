@@ -71,4 +71,9 @@ export default {
 .magentabg {
   background: #d3188e;
 }
+@media (max-width: 960px) {
+  .dashboard-view {
+    padding: 0 20px 0;
+  }
+}
 </style>

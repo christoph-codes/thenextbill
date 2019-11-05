@@ -405,10 +405,7 @@ img.importance_icon {
 a.edit-bill-link {
   font-size: 12px;
   color: var(--gray);
+  display: block;
 }
-@media (max-width: 960px) {
-  a.edit-bill-link[data-v-08ea8f46] {
-    display: block;
-  }
-}
+
 </style>

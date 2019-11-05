@@ -206,4 +206,13 @@ h1.page-header,
   font-size: 18px;
   font-weight: lighter;
 }
+@media (max-width: 600px) {
+  .main,
+  .narrow {
+    padding: 0 10px;
+  }
+  .btn {
+    padding: 10px 0;
+  }
+}
 </style>

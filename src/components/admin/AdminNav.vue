@@ -1,12 +1,12 @@
 <template>
   <div class="admin-nav">
     <div class="uk-grid">
-      <div class="uk-width-3-4">
+      <div class="uk-width-3-4@m">
         <div class="admin-date">
           <p>Today's Date: <b v-text="getDate()" /></p>
         </div>
       </div>
-      <div class="uk-width-1-4">
+      <div class="uk-width-1-4@m uk-visible@m">
         <ul v-if="admin" class="uk-nav uk-nav-default">
           <li class="uk-parent">
             <a href="#">{{ admin.fname }}</a>
@@ -121,5 +121,10 @@ ul.uk-nav-sub a {
 }
 a.router-link-exact-active {
   font-weight: bold;
+}
+@media (max-width: 600px) {
+  .admin-nav {
+    text-align: center;
+  }
 }
 </style>

@@ -400,4 +400,13 @@ img.importance_icon {
     padding: 10px 0;
   }
 }
+@media (max-width: 600px) {
+  .add-bill-card {
+    bottom: 0px;
+    z-index: 99;
+  }
+  tbody tr:first-child {
+    background: none;
+  }
+}
 </style>

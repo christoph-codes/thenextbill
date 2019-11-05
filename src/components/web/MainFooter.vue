@@ -27,4 +27,9 @@ export default {
   color: var(--gray);
   font-size: 10px;
 }
+@media (max-width: 600px) {
+  .main-footer {
+    position: relative;
+  }
+}
 </style>

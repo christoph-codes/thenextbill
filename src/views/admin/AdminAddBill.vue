@@ -35,7 +35,7 @@
         <label>How Important Is This Bill To You?</label>
         <select required v-model="importance">
           <option disabled value=" ">Please Choose</option>
-          <option value="1">Very</option>
+          <option value="1">High</option>
           <option value="2">Medium</option>
           <option value="3">Low</option>
         </select>

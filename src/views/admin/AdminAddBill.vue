@@ -52,8 +52,7 @@
         <input
           type="submit"
           value="Save"
-          class="btn prime modal"
-          uk-toggle="target: #toggle-another-bill-modal"
+          class="btn prime"
         />
 
         <router-link to="/admin/dashboard" class="link">Cancel</router-link>
@@ -96,6 +95,7 @@
 import firebase from "firebase";
 import db from "@/firebase/init";
 import slugify from "slugify";
+import UIkit from "uikit";
 
 export default {
   name: "admin-add-bill",
@@ -151,6 +151,7 @@ export default {
             slug: this.slug
           })
           .then(() => {
+            UIkit.modal("#toggle-another-bill-modal").show();
             this.feedback = "Bill Successfully Added!"
             this.name = "";
             this.due_day = "";

@@ -154,13 +154,15 @@ select {
   background: white;
   width: calc(100% + 10px);
 }
-form input[type="submit"],
-.add-another {
-  text-align: center;
-  display: block;
-  margin: 0 auto 10px;
+form input[type="submit"], 
+.add-another, 
+.uk-modal-close {
+    text-align: center;
+    display: block;
+    margin: 0 auto 10px;
 }
-.add-another {
+.add-another, 
+.uk-modal-close {
   max-width: 250px;
 }
 form a.link {
@@ -205,6 +207,9 @@ h1.page-header,
   color: var(--gray);
   font-size: 18px;
   font-weight: lighter;
+}
+.uk-modal-title {
+    text-align: center;
 }
 @media (max-width: 600px) {
   .main,

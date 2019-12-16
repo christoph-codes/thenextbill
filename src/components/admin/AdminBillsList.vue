@@ -200,6 +200,28 @@ export default {
       this.selectedBill = bill;
     },
     toggle(bill) {
+      let date = bill.due_day.toDate();
+
+      date.setMonth(date.getMonth() + 1);
+      
+      // adding a new bill data to the database
+        db.collection("bills")
+          .add({
+            amount: bill.amount,
+            category: bill.category,
+            due_day: date,
+            name: bill.name,
+            importance: bill.importance,
+            // recurrence: this.recurrence,
+            user_id: this.admin.user_id,
+            creationdate: new Date(),
+            paid_status: false,
+            slug: bill.slug
+          })
+          .then(() => {
+            console.log(bill);
+          });
+
       db.collection("bills")
         .doc(bill.id)
         .update({
@@ -212,6 +234,7 @@ export default {
           // ******** USE THIS CONSOLE LOG FOR TESTING! ********console.log(bill.name);
           // console.log("Paid Status Updated");
           this.selectedBill = "";
+
         })
         .catch(err => {
           // catch errors if something goes wrong

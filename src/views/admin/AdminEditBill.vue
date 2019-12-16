@@ -145,7 +145,6 @@ export default {
           .update({
             amount: this.bill.amount,
             category: this.bill.category,
-            // due_day: this.fbDate,
             due_day: this.fbDate,
             name: this.bill.name,
             importance: this.bill.importance,
